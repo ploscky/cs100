@@ -1,6 +1,6 @@
 # Homework Helper
  
- Authors: [Richard Zhou](https://github.com/rzhou052), [George Babik](https://github.com/gababik), [Nada Salib](https://github.com/nsalib), [Selina Wu](https://github.com/ploscky)
+ Authors: [Richard Zhou](https://github.com/rzhou052), [George Babik](https://github.com/gababik), [Nada Salib](https://github.com/nadasalib), [Selina Wu](https://github.com/ploscky)
 
 ## Project Description
 
