@@ -6,22 +6,13 @@
 
 * Why is it important or interesting to you?
 
-This project is intriguing because of its potential to significantly impact college students by helping them consolidate all their assignments for various classes in one place. Nowadays, most professors list their assignments on a single syllabus, leaving students with the task of managing them. Our software simplifies this process by automatically extracting assignments from the syllabus.
+This project is intriguing because of its potential to significantly impact college students, by helping them consolidate all their assignments for various classes in one place. Nowadays, most professors list their assignments on a single syllabus, leaving students with the task of managing them all by themselves. Our software simplifies this process by automatically extracting assignments from the syllabus. Speaking from personal experience, every quarter, I, George, would painstakingly sift through each syllabus, to get all my assignments together. Now, with our program, that tedious process is more simplifed. I've observed numerous online discussions and videos where students attempt various methods to organize their tasks. Our solution could be the game-changer they've been seeking.
 
 
 * What are the features that the project provides?
   
 Our project, Homework Helper, will help organize assignments for the user. The user will feed in pdfs of syllabi, and our homework helper will automatically read in homework schedules and quiz/test dates, and put them on a calendar for the user to look at and use throughout the academic session. In certain cases, if our program can't properly read in data, the user can always use a manual input to help organize their schedules. We're writing this project in c++, and plan on using APIs to help detect text in the pdfs inputted by the user.
 
-
- > Your project description should summarize the project you are proposing. Be sure to include:
-
- > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
- > * What will be the input/output of your project?
- > * 
- > This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
- > 
- > You also need to set up an empty project board using GitHub projects (board view). Make sure you add the board under your project repository. You should also have a Product Backlog and In testing columns added.
  > ## Phase II
  > In addition to completing the "User Interface Specification" and "Class Diagram" sections below, you will need to:
  > * Create an "Epic" (note) for each feature. Place these epics in the `Product Backlog` column
