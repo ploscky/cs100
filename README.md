@@ -5,6 +5,7 @@
 ## Project Description
 
 * Why is it important or interesting to you?
+
 This project is intriguing because of its potential to significantly impact college students by helping them consolidate all their assignments for various classes in one place. Nowadays, most professors list their assignments on a single syllabus, leaving students with the task of managing them. Our software simplifies this process by automatically extracting assignments from the syllabus.
 
 
