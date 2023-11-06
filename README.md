@@ -66,19 +66,18 @@ Screen-HowToPlay:
 Chess is played on an 8x8 grid, with each player starting
 with 16 pieces that move in distinct ways. To win, you must
 checkmate your opponent's king.
-Notation:
+Rules:
 - Use chess notation for moves, e.g., "Ne6".
-- Each piece is identified by an uppercase letter for black:
+- A move is denoted by the piece's letter and its destination
+  square, e.g., "Nf3" moves a knight to the f3 square.
+- On the board each white piece is identified by an uppercase letter:
   R for Rook, N for Knight, B for Bishop, Q for Queen,
   K for King, and P for Pawn.
-- Each piece is identified by an uppercase letter for white:
+- On the board each black piece is identified by a lowercase letter:
   r for Rook, n for Knight, b for Bishop, q for Queen,
   k for King, and p for Pawn.
 - The columns (files) are labeled a-h from left to right,
-  and the rows (ranks) are labeled 1-8 from bottom to top
-  from White's perspective.
-- A move is denoted by the piece's letter and its destination
-  square, e.g., "Nf3" moves a knight to the f3 square.
+  and the rows (ranks) are labeled 1-8 from bottom to top.
 - To capture, simply move your piece to the square occupied
   by an opponent's piece.
 - Pawns are not denoted by letter, only by the destination
@@ -91,7 +90,7 @@ Special Moves:
 - "promotion" occurs when a pawn reaches the farthest rank.
 
 Commands:
-- " e2 e4": Make a move from e2 to e4.
+- "e4": To move a pawn to e4.
 - "exit": Exit the current game and return to the main menu.
 - "help": Show a list of commands and rules.
 
@@ -127,7 +126,7 @@ Status: [Game Status, ex( "White's Turn", "Check", "Checkmate")]
   ---------------------------------
 2 | P | P | P | P | P | P | P | P |
   ---------------------------------
-1 | R | N | B | Q | K | B | N | R |
+1 | R | N | B | K | Q | B | N | R |
   ---------------------------------
 ```
 Components:
@@ -174,7 +173,7 @@ Screen-GameLog:
 ---------------------------------
 Moves are listed in chess notation. Each line represents
 a full turn, with White's move listed first.
-1. e5
+1. e4 e5
 2. Nf3 Nc6
 3. Bb5 a6
 4. Ba4 Nf6
