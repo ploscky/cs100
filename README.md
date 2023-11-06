@@ -31,45 +31,43 @@ The navigation diagram shows the process of a user playing through a chess game 
 
 ### Screen Layouts
 Screen-Start:
-
-**---------------------------------**
-           
+```
+---------------------------------        
            CHESS GAME
-
-**---------------------------------**
+---------------------------------
 1. Start New Game
-2. Load Saved Game
-3. How to Play
-4. Exit
-
-
+2. How to Play
+3. Exit
 Enter your choice: [input]
+```
 Components:
 Title: Simply the name of the game "CHESS GAME".
-Options 1-4: Clear and concise menu options for the user.
+
+Options 1-3: Clear and concise menu options for the user.
+
 Input Prompt: Where the user types their selection.
+
 Purpose:
+
 Start New Game: Begins a new chess game.
-Load Saved Game: Allows users to continue a previously saved game.
+
 How to Play: Displays rules and controls for the game.
-Settings: Allows users to tweak game options, such as board color or piece characters.
+
 Exit: Closes the application.
 
 
 
 Screen-HowToPlay:
-
-**---------------------------------**
-           
-           HOW TO PLAY
-           
-**---------------------------------**
+```
+---------------------------------   
+           HOW TO PLAY    
+---------------------------------
 
 Chess is played on an 8x8 grid, with each player starting
 with 16 pieces that move in distinct ways. To win, you must
 checkmate your opponent's king.
 Notation:
-- Use chess notation for moves, e.g., "e2 e4".
+- Use chess notation for moves, e.g., "Ne6".
 - Each piece is identified by an uppercase letter for black:
   R for Rook, N for Knight, B for Bishop, Q for Queen,
   K for King, and P for Pawn.
@@ -93,14 +91,13 @@ Special Moves:
 - "promotion" occurs when a pawn reaches the farthest rank.
 
 Commands:
-- "move e2 e4": Make a move from e2 to e4.
-- "save": Save the current game state to resume later.
+- " e2 e4": Make a move from e2 to e4.
 - "exit": Exit the current game and return to the main menu.
 - "help": Show a list of commands and rules.
-- "undo": Revert the last move (if allowed by game settings).
 
 Type your commands or moves when prompted during gameplay.
 Press any key to return to the main menu
+```
 Components & Purpose:
 Instructions: Basic rules and gameplay guidance.
 Commands: A list of available commands for the player.
@@ -108,82 +105,92 @@ Return Prompt: Lets the player know they can return to the main menu.
 
 
 Screen-Play:
-
-Player 1 (White): [Player 1's Name]
-
-Player 2 (Black): [Player 2's Name]
-
+```
+---------------------------------
+              BOARD
+---------------------------------
 Status: [Game Status, ex( "White's Turn", "Check", "Checkmate")]
-
-
-  **---------------------------------**
-                  
-                BOARD
-                  
-  **---------------------------------**
    
-   A  B  C  D  E  F  G  H  
+    A   B   C   D   E   F   G   H
+  ---------------------------------
 8 | r | n | b | q | k | b | n | r |
-
   ---------------------------------
 7 | p | p | p | p | p | p | p | p |
-
   ---------------------------------
 6 | . | . | . | . | . | . | . | . |
-
   ---------------------------------
 5 | . | . | . | . | . | . | . | . |
-
   ---------------------------------
 4 | . | . | . | . | . | . | . | . |
-
   ---------------------------------
 3 | . | . | . | . | . | . | . | . |
-
   ---------------------------------
 2 | P | P | P | P | P | P | P | P |
-
   ---------------------------------
 1 | R | N | B | Q | K | B | N | R |
-
   ---------------------------------
+```
 Components:
 
-Player Names & Status: Displays who's playing and the current game status.
+Status: Displays the current game status.
 
 Chessboard: Represents the game state. Uppercase letters for white pieces, lowercase for black pieces. (R/r for Rooks, N/n for Knights, etc.)
 
 Command Input: Where players input their moves, using a format like "e2 e4".
+
 Options: Additional commands players can use.
+
 Purpose:
 
 Chessboard Display: To visualize the current state of the game.
 
 Command Input: For players to make moves or use other commands.
-Options:
-
-save: Save the current game state to be loaded later.
 
 exit: Return to the main menu.
 
 help: View list of possible commands and game controls.
 
 Screen-GameOver:
-
-**-----------------------------------------------------------**
-
-        GAME OVER - [WINNER White/Black]
-        
-**------------------------------------------------------------**
-1. Rematch
-2. Return to Main Menu
+```
+-----------------------------------------------------------
+        GAME OVER - [WINNER White/Black or Stalemate
+------------------------------------------------------------
+1. Continue
+2. Quit
 Choose an option: [input]
-
+```
 Components & Purpose:
 
 Game Over Message: Displays the game's outcome.
 
-Rematch: Starts a new game with the same players.
+Continue: Goes to the game log.
+
+Quit: Ends Program.
+
+Screen-GameLog:
+```
+---------------------------------
+            GAME LOG
+---------------------------------
+Moves are listed in chess notation. Each line represents
+a full turn, with White's move listed first.
+1. e5
+2. Nf3 Nc6
+3. Bb5 a6
+4. Ba4 Nf6
+6. Re1 b5
+7. Bb3 d6
+...
+Commands:
+1. Return to Main Menu
+2. Quit
+Enter command: [input]
+```
+Components & Purpose:
+
+Return to Main Menu: Go back to main menu to play again.
+
+Quit: Ends program. 
 
 
 
