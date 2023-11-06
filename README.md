@@ -31,14 +31,18 @@ The navigation diagram shows the process of a user playing through a chess game 
 
 ### Screen Layouts
 Screen-Start:
----------------------------------
+
+**---------------------------------**
+           
            CHESS GAME
----------------------------------
+
+**---------------------------------**
 1. Start New Game
 2. Load Saved Game
 3. How to Play
 4. Exit
----------------------------------
+
+
 Enter your choice: [input]
 Components:
 Title: Simply the name of the game "CHESS GAME".
@@ -50,10 +54,17 @@ Load Saved Game: Allows users to continue a previously saved game.
 How to Play: Displays rules and controls for the game.
 Settings: Allows users to tweak game options, such as board color or piece characters.
 Exit: Closes the application.
+
+
+
 Screen-HowToPlay:
----------------------------------
+
+**---------------------------------**
+           
            HOW TO PLAY
----------------------------------
+           
+**---------------------------------**
+
 Chess is played on an 8x8 grid, with each player starting
 with 16 pieces that move in distinct ways. To win, you must
 checkmate your opponent's king.
@@ -97,28 +108,43 @@ Return Prompt: Lets the player know they can return to the main menu.
 
 
 Screen-Play:
+
 Player 1 (White): [Player 1's Name]
+
 Player 2 (Black): [Player 2's Name]
+
 Status: [Game Status, ex( "White's Turn", "Check", "Checkmate")]
-  ---------------------------------
-     -- Board --
-  ---------------------------------
+
+  **---------------------------------**
+                  
+                BOARD
+                  
+  **---------------------------------**
+   
    A  B  C  D  E  F  G  H  
 8 | r | n | b | q | k | b | n | r |
+
   ---------------------------------
 7 | p | p | p | p | p | p | p | p |
+
   ---------------------------------
 6 | . | . | . | . | . | . | . | . |
+
   ---------------------------------
 5 | . | . | . | . | . | . | . | . |
+
   ---------------------------------
 4 | . | . | . | . | . | . | . | . |
+
   ---------------------------------
 3 | . | . | . | . | . | . | . | . |
+
   ---------------------------------
 2 | P | P | P | P | P | P | P | P |
+
   ---------------------------------
 1 | R | N | B | Q | K | B | N | R |
+
   ---------------------------------
 Components:
 Player Names & Status: Displays who's playing and the current game status.
