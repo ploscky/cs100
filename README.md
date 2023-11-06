@@ -115,6 +115,7 @@ Player 2 (Black): [Player 2's Name]
 
 Status: [Game Status, ex( "White's Turn", "Check", "Checkmate")]
 
+
   **---------------------------------**
                   
                 BOARD
@@ -147,26 +148,41 @@ Status: [Game Status, ex( "White's Turn", "Check", "Checkmate")]
 
   ---------------------------------
 Components:
+
 Player Names & Status: Displays who's playing and the current game status.
+
 Chessboard: Represents the game state. Uppercase letters for white pieces, lowercase for black pieces. (R/r for Rooks, N/n for Knights, etc.)
+
 Command Input: Where players input their moves, using a format like "e2 e4".
 Options: Additional commands players can use.
 Purpose:
+
 Chessboard Display: To visualize the current state of the game.
+
 Command Input: For players to make moves or use other commands.
 Options:
+
 save: Save the current game state to be loaded later.
+
 exit: Return to the main menu.
+
 help: View list of possible commands and game controls.
+
 Screen-GameOver:
------------------------------------------------------------
+
+**-----------------------------------------------------------**
+
         GAME OVER - [WINNER White/Black]
-------------------------------------------------------------
+        
+**------------------------------------------------------------**
 1. Rematch
 2. Return to Main Menu
 Choose an option: [input]
+
 Components & Purpose:
+
 Game Over Message: Displays the game's outcome.
+
 Rematch: Starts a new game with the same players.
 
 
