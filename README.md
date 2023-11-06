@@ -25,7 +25,7 @@
 ## User Interface Specification
 
 ### Navigation Diagram
-The navigation diagram shows the process of a user playing through a chess game and the different options they can choose throughout. First, they are met with a page of instructions and rules of the game. This is followed by a printed chessboard with the pieces in the starting positions. Then the user is prompted to input their desired move, which updates the chessboard. At certain points, a user also has the opportunity to make a special move like castling, pawn promotion, etc. Users are allowed to exit the game at any time, which brings them to the end-of-game page that displays the chess notation of all the moves made up to that point. This page also appears after a game that has reached checkmate or stalemate. After the log of chess notation is printed, the program resets.
+The navigation diagram shows the process of a user playing through a chess game and the different options they can choose throughout. First, they are met with a menu that gives them the choice to start the game or view a page of instructions and rules of the game. Should they choose to start the game, a chessboard with the pieces in the starting positions is printed. Then the user is prompted to input their desired move, which updates the chessboard. At certain points, a user also has the opportunity to make a special move like castling, pawn promotion, etc. Users are allowed to exit the game at any time, which brings them to the end-of-game page. Once they view the log of all the moves made up to that point in chess notation, they can play again, rerouting them back to the main menu, or end the program.
 
 <img src="Navigation Diagram.png?raw=true" width="1000">
 
