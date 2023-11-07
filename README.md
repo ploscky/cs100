@@ -4,24 +4,23 @@
 
 ## Project Description
 
-* Why is it important or interesting to you?
+### Motivation
+The development of a terminal-based chess project is compelling because of the inherent complexities of the game that make it challenging to program. This project also gives us the opportunity to explore the principles of user interface design. It requires a thorough understanding of data structures and algorithms to implement.
+
+### Languages, Tools, and Technologies
+The project will primarily use C++ for programming the chess logic and interface. It will use the language’s standard input/output functionalities for handling moves and printing the game in the terminal. Beyond that, GitHub and Visual Studio Code will be used to create this program.
+
+### Inputs and Outputs
+The inputs will be moves entered in chess notation (e.g., " Qf7" to move the queen to f7). The output will display the current board state after each move within the terminal. The first output of the program is the starting screen that gives users the option to read instructions of the game, start a game, or exit. At the end of each game, a log of all the moves will be displayed in chess notation as well.
+ 
+### Features
+* Chess Logic: Implementing the traditional rules of chess, meaning legal moves for each piece, check, checkmate, and stalemate conditions.
+* Move Validation: Verifying the legality of moves and providing messages for illegal moves.
+* Game State Management: Tracking the current board position, the player turns, available moves, and displaying the updated chessboard after each move.
+* Terminal User Interface: Displaying the chessboard and game interface directly in the terminal.
+* Two-Player Mode: Allows for a local multiplayer.
 
 
-
-* What are the features that the project provides?
-
-
- > ## Phase II
- > In addition to completing the "User Interface Specification" and "Class Diagram" sections below, you will need to:
- > * Create an "Epic" (note) for each feature. Place these epics in the `Product Backlog` column
- > * Complete your first *sprint planning* meeting to plan out the next 7 days of work.
- >   * Break down the "Epics" into smaller actionable user stories (i.e. smaller development tasks). Convert them into issues and assign them to team members. Place these in the `TODO` (aka Sprint Backlog) column.
- >   * These cards should represent roughly 7 days worth of development time for your team. Then, once the sprint is over you should be repeating these steps to plan a new sprint, taking you until your second scrum meeting with the reader in phase III.
- > * Schedule two check-ins using Calendly. You need to pick both time slots on Tuesday of week 6. The check-ins will occur on Zoom. Your entire team must be present for both check-ins.
- >   * The first check-in needs to be scheduled with your lab TA. During that meeting, you will discuss your project design/class diagram from phase II.
- >   * The second check-in should be scheduled with a reader. During that meeting you will discuss:
- >     * The tasks you are planning for the first sprint
- >     * How work will be divided between the team members
 ## User Interface Specification
 
 ### Navigation Diagram
