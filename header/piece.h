@@ -1,16 +1,16 @@
 #pragma once
 
+#include <string>
+
 using namespace std;
 
 class Piece
 {
-    private:
+    protected:
         char color;
         char notation;
 
     public:
-        Piece(char n, char c) : notation(n), color(c) {}
-        
         char getColor()
             {return color;}
         
@@ -20,4 +20,5 @@ class Piece
         void setNotation(char n)
             {notation = n;}
 
+        virtual string getMoves(string) = 0;
 };

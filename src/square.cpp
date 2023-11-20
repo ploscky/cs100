@@ -4,7 +4,7 @@ Square::Square(int file, int rank)
 {
     currPiece = nullptr;
 
-    coordinates += static_cast<char>('Z' + file);
+    coordinates += static_cast<char>('a' + file - 1);
     coordinates += static_cast<char>('0' + rank);
 }
 
@@ -18,6 +18,12 @@ bool Square::empty()
     
     return false;
 }
+
+// void Square::setCoordinates(int file, int rank)
+// {
+//     coordinates += static_cast<char>('Z' + file);
+//     coordinates += static_cast<char>('0' + rank);
+// }
 
 string Square::getLegalMoves()
 {

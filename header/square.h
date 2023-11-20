@@ -1,11 +1,10 @@
 #pragma once
 
 #include "piece.h"
-#include <string>
 
-class Square //: public Board
+class Square
 {
-    public: //protected:
+    private:
         Piece *currPiece;
         string coordinates;
 
@@ -13,7 +12,9 @@ class Square //: public Board
         Square(int, int);
         ~Square();
         bool empty();
+        // void setCoordinates(int, int);
         string getCoordinates() {return coordinates;}
         void setPiece(Piece *p) {currPiece = p;}
+        Piece * getPiece()      {return currPiece;}
         string getLegalMoves();
 };
