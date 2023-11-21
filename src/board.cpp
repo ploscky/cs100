@@ -2,6 +2,15 @@
 #include <iostream>
 using namespace std;
 
+
+Board::Board() {
+    //FIXME
+}
+
+Board::~Board() {
+    //FIXME
+}
+
 void Board::print() {
     cout <<
         "-----------------------------------\n"
@@ -27,4 +36,19 @@ void Board::print() {
         "  ---------------------------------\n"
         "1 | R | N | B | K | Q | B | N | R |\n"
         "  ---------------------------------\n";
+}
+
+Square* Board::getSquare (int file, int rank) {
+    //FIXME
+    Square* fixme;
+    return fixme;
+}
+
+void Board::movePiece (string from, string to) {
+    //FIXME
+    return;
+}
+
+string Board::getLegalMoves(int file, int rank) {
+    return "FIXME";
 }
