@@ -5,8 +5,5 @@
 using namespace std;
 
 
-void showMainMenu();
-void showHowToPlay();
-void showPlayScreen();
-void showGameOverScreen();
-void showGameLogScreen();
+void mainMenu();
+void printInstructions();

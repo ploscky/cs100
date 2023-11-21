@@ -1,6 +1,6 @@
 #include "../header/game.h"
 
-void showMainMenu() {
+void mainMenu() {
     int choice;
 
     cout <<
@@ -16,21 +16,20 @@ void showMainMenu() {
 
     switch (choice) {
         case 1:
-            showPlayScreen();
             break;
         case 2:
-            showHowToPlay();
+            printInstructions();
             break;
         case 3:
             exit(0);
             break;
         default:
             cout << "Invalid choice, please try again.\n";
-            showMainMenu();
+            mainMenu();
     }
 }
 
-void showHowToPlay() {
+void printInstructions() {
     cout <<  
     "---------------------------------\n"
     "           HOW TO PLAY\n"
@@ -66,22 +65,10 @@ void showHowToPlay() {
     "Type your commands or moves when prompted during gameplay.\n"
     "Press any key to return to the main menu\n";
     cin.ignore(); cin.get();
-    showMainMenu();
+    mainMenu();
 }
-
-
-void showPlayScreen() {
-}
-
-void showGameOverScreen() {
-}
-
-void showGameLogScreen() {
-
-}
-
 
 int main() {
-    showMainMenu();
+    mainMenu();
     return 0;
 }
