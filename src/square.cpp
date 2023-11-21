@@ -24,8 +24,3 @@ bool Square::empty()
 //     coordinates += static_cast<char>('Z' + file);
 //     coordinates += static_cast<char>('0' + rank);
 // }
-
-string Square::getLegalMoves()
-{
-    return "FIXME";
-}

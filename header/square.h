@@ -16,5 +16,4 @@ class Square
         string getCoordinates() {return coordinates;}
         void setPiece(Piece *p) {currPiece = p;}
         Piece * getPiece()      {return currPiece;}
-        string getLegalMoves();
 };

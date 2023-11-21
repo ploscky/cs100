@@ -14,4 +14,8 @@ class Board
         void print();
         Square * getSquare(int, int);
         void movePiece(string, string);
+        string getLegalMoves(int, int);
+    
+    private:
+        void getPawnLegalMoves(string &, Square *, Piece *, int, int);
 };
