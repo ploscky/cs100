@@ -1,6 +1,47 @@
 #include "../header/game.h"
+#include "../header/board.h"
+Game::Game(){
+    // Implement later
+}
 
-void mainMenu() {
+void Game::play() {
+    // Implement later
+}
+
+void Game::printGameLog() {
+    // Implement later
+}
+
+bool Game::isCheckmate() {
+    // Implement later
+    return false;
+}
+
+bool Game::isStalemate() {
+    // Implement later
+    return false;
+}
+
+bool Game::invalidInput() {
+    // Implement later
+    return false;
+}
+
+bool Game::isLegalMove(char piece, char rankFile, const std::string& coordinates) {
+    // Implement later
+    return false;
+}
+
+bool Game::inCheck() {
+    // Implement later
+    return false;
+}
+
+void Game::saveGameLog(const string& fileName){
+    // Implement later
+}
+
+void Game::mainMenu() {
     int choice;
 
     cout <<
@@ -29,7 +70,7 @@ void mainMenu() {
     }
 }
 
-void printInstructions() {
+void Game::printInstructions() {
     cout <<  
     "---------------------------------\n"
     "           HOW TO PLAY\n"
@@ -65,10 +106,6 @@ void printInstructions() {
     "Type your commands or moves when prompted during gameplay.\n"
     "Press any key to return to the main menu\n";
     cin.ignore(); cin.get();
-    mainMenu();
-}
-
-int main() {
-    mainMenu();
-    return 0;
+    Game open;
+    open.mainMenu();
 }
