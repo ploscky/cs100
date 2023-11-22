@@ -217,6 +217,10 @@ Our game will be comprised of 4 main classes, the game itself, the board, the sq
  > * Any bugs you've identified and created issues for during the sprint. Do you plan on fixing them in the next sprint or are they lower priority?
  > * What tasks you are planning for this next sprint.
 
+UML Diagram Updates:
+* We added two int type parameters to the getSquare function in Board class. These parameters are for the file and rank of the Square that the function is getting. This change in code adheres to the Open-Closed Principle because it is extending the Square class instead of directly modifying it. The function returns a Square, which is the class associated with Board. It leads to better code because it now clarifies the specific Square parameters that are needed to return something for the function.
+* We added individual private helper functions to the Board class for the public function getLegalMoves(). These functions are called to find the possible legal moves that can be made for each individual piece. This adheres to the Interface-Segregation Principle because the functions are only called when their corresponding piece needs to check its legal move, so the pieces are separated from each other.
+
  
  > ## Final deliverable
  > All group members will give a demo to the reader during lab time. ou should schedule your demo on Calendly with the same reader who took your second scrum meeting. The reader will check the demo and the project GitHub repository and ask a few questions to all the team members. 
