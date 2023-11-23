@@ -1,44 +1,21 @@
 #include "../header/game.h"
-#include "../header/board.h"
-Game::Game(){
-    // Implement later
-}
+
+Game::Game()
+    {game = new Board();}
+
+Game::~Game()
+    {delete game;}
 
 void Game::play() {
-    // Implement later
+    // FIXME
 }
 
 void Game::printGameLog() {
-    // Implement later
-}
-
-bool Game::isCheckmate() {
-    // Implement later
-    return false;
-}
-
-bool Game::isStalemate() {
-    // Implement later
-    return false;
-}
-
-bool Game::invalidInput() {
-    // Implement later
-    return false;
-}
-
-bool Game::isLegalMove(char piece, char rankFile, const std::string& coordinates) {
-    // Implement later
-    return false;
-}
-
-bool Game::inCheck() {
-    // Implement later
-    return false;
+    // FIXME
 }
 
 void Game::saveGameLog(const string& fileName){
-    // Implement later
+    // FIXME
 }
 
 void Game::mainMenu() {
@@ -60,6 +37,7 @@ void Game::mainMenu() {
             break;
         case 2:
             printInstructions();
+            mainMenu();
             break;
         case 3:
             exit(0);
@@ -106,6 +84,51 @@ void Game::printInstructions() {
     "Type your commands or moves when prompted during gameplay.\n"
     "Press any key to return to the main menu\n";
     cin.ignore(); cin.get();
-    Game open;
-    open.mainMenu();
+}
+
+bool Game::isCheckmate() {
+    // FIXME
+    return false;
+}
+
+bool Game::isStalemate() {
+    // FIXME
+    return false;
+}
+
+bool Game::isLegalMove(bool whiteTurn, string input) 
+{
+    if (whiteTurn)
+    {
+        for (int i = 1; i <= 8; ++i)
+        {
+            for (int j = 1; j <= 8; ++j)
+            {
+                if (game->getSquare(i, j)->getPiece() != nullptr &&
+                    game->getSquare(i, j)->getPiece()->getColor() == 'w' && 
+                    game->getLegalMoves(i, j).find(input) != string::npos)
+                    {return true;}
+            }
+        }
+    }
+    else
+    {
+        for (int i = 1; i <= 8; ++i)
+        {
+            for (int j = 1; j <= 8; ++j)
+            {
+                if (game->getSquare(i, j)->getPiece() != nullptr &&
+                    game->getSquare(i, j)->getPiece()->getColor() == 'b' && 
+                    game->getLegalMoves(i, j).find(input) != string::npos)
+                    {return true;}
+            }
+        }
+    }
+
+    return false;
+}
+
+bool Game::inCheck() {
+    // FIXME
+    return false;
 }

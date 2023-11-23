@@ -1,9 +1,12 @@
-
 #include "../header/game.h"
-#include "../header/board.h"
-int main(){
-Game curr;
 
-curr.mainMenu();
-return 0;
+int main()
+{
+    Game g;
+
+    // curr.mainMenu();
+
+    cout << g.isLegalMove(false, " xe2 ") << endl;
+
+    return 0;
 }

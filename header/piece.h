@@ -13,7 +13,7 @@ class Piece
         bool moved;
 
     public:
-        Piece(char, char);
+        Piece(char, char); // (color, notation)
         char getColor()             {return color;}
         char getNotation()          {return notation;}
         void setNotation(char n)    {notation = n;}

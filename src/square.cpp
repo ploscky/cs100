@@ -18,9 +18,3 @@ bool Square::empty()
     
     return false;
 }
-
-// void Square::setCoordinates(int file, int rank)
-// {
-//     coordinates += static_cast<char>('Z' + file);
-//     coordinates += static_cast<char>('0' + rank);
-// }
