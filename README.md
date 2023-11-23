@@ -196,26 +196,12 @@ Quit: Ends program.
 <img src="UML Class Diagram.png?raw=true" width="1000">
 
 Our game will be comprised of 4 main classes, the game itself, the board, the squares on the board, and the game pieces. The Game class has the primary controls over the game, such as switching turns and saving the game log afterwards. It will also hold the logic for determining whether inputs are valid, and when they are, whether they are legal moves or not. The Board class controls an 8x8 matrix of Squares, simulating a chessboard and holds the primary controls for moving the pieces themselves, and contains the graphics that the game will print out for the user. The Square class helps calculate all possible moves of the piece within the square, assisting in checking the legality of moves. Finally, the Piece class contains data that determines what each unique piece can do, and which side it belongs to, making sure it moves in the correct directions and captures the correct pieces.
- 
- > ## Phase III
- > You will need to schedule a check-in for the second scrum meeting with the same reader you had your first scrum meeting with (using Calendly). Your entire team must be present. This meeting will occur on Zoom and should be conducted by Wednesday of week 8.
- 
- > BEFORE the meeting you should do the following:
- > * Update your class diagram from Phase II to include any feedback you received from your TA/grader.
- > * Considering the SOLID design principles, reflect back on your class diagram and think about how you can use the SOLID principles to improve your design. You should then update the README.md file by adding the following:
- >   * A new class diagram incorporating your changes after considering the SOLID principles.
- >   * For each update in your class diagram, you must explain in 3-4 sentences:
- >     * What SOLID principle(s) did you apply?
- >     * How did you apply it? i.e. describe the change.
- >     * How did this change help you write better code?
- > * Perform a new sprint plan like you did in Phase II.
- > * You should also make sure that your README file (and Project board) are up-to-date reflecting the current status of your project and the most recent class diagram. Previous versions of the README file should still be visible through your commit history.
- 
-> During the meeting with your reader you will discuss: 
- > * How effective your last sprint was (each member should talk about what they did)
- > * Any tasks that did not get completed last sprint, and how you took them into consideration for this sprint
- > * Any bugs you've identified and created issues for during the sprint. Do you plan on fixing them in the next sprint or are they lower priority?
- > * What tasks you are planning for this next sprint.
+
+UML Diagram Updates:
+* We added two int type parameters to the getSquare function in Board class. These parameters are for the file and rank of the Square that the function is getting. This change in code adheres to the Open-Closed Principle because it is extending the Square class instead of directly modifying it. The function returns a Square, which is the class associated with Board. It leads to better code because it now clarifies the specific Square parameters that are needed to return something for the function.
+* We added individual private helper functions to the Board class for the public function getLegalMoves(). These functions are called to find the possible legal moves that can be made for each individual piece. This adheres to the Interface-Segregation Principle because the functions are only called when their corresponding piece needs to check its legal move, so the pieces are separated from each other.
+* We deleted the individual piece classes and opted to use private helper functions in the Board class to get the legal moves for each piece instead. By doing so, this class observes the Open-Closed Principle since we no longer need to modify each of the classes when modifications are made. Rather, we can extend this class and leave the private functions untouched. This improvement can refine our code because it minimizes changes, and narrows the scope of modifications which makes it easier to identify the source of a bug or logic error.
+* The UML diagram was also updated to express multiplicities. These can help further define the relationship between classes. This addition guides the design of the classes so that they follow the Dependency Inversion Principle, which states that high-level modules should not depend on low-level modules. Visualizing the associations between classes makes it easier to identify changes that need to be made to the class diagram in order to follow solid principles.
 
  
  > ## Final deliverable
