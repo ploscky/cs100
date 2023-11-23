@@ -1,5 +1,7 @@
+#pragma once
+
+#include "board.h"
 #include <iostream>
-#include <string>
 #include <cstdlib>
 #include <vector>
 #include <string>
@@ -9,18 +11,21 @@ using namespace std;
 
 class Game {
 private:
+    Board *game;
     vector<string> gameLog;
 
 public:
     Game();
+    ~Game();
     void mainMenu();
     void printInstructions();
     void play();
     void printGameLog();
+    void saveGameLog(const string& fileName);
+
+public: // private: for testing purposes
     bool isCheckmate();
     bool isStalemate();
-    bool invalidInput();
-    bool isLegalMove(char piece, char rankFile, const string& coordinates);
+    bool isLegalMove(bool, string); // (white's turn, input)
     bool inCheck();
-    void saveGameLog(const string& fileName);
 };

@@ -4,7 +4,7 @@
 
 class Board
 {
-    public: //protected? i dont remember how this works lol
+    public: // protected? i dont remember how this works lol
         Square *board[8][8];
 
     public:

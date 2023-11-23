@@ -2,9 +2,12 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 
 add_subdirectory(googletest)
 
-ADD_EXECUTABLE(inputValidation
-    src/inputValidation.cpp
-    tests/inputTests.cpp
+ADD_EXECUTABLE(test
+    src/board.cpp
+    src/game.cpp
+    src/piece.cpp
+    src/square.cpp
+    tests/test.cpp
 )
 
-target_link_libraries(inputValidation gtest gtest_main)
+target_link_libraries(test gtest gtest_main)

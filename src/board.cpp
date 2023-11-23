@@ -1,7 +1,7 @@
 #include "../header/board.h"
 #include <iostream>
 
-Board::Board()
+Board::Board() // generates empty board with 1 pawn at e2 for testing purposes, need to add rest of starting pieces
 {
     for (int file = 1; file <= 8; ++file)
     {
@@ -10,6 +10,9 @@ Board::Board()
             board[file - 1][rank - 1] = new Square(file, rank);
         }
     }
+
+    getSquare(5, 2)->setPiece(new Piece('w', 'P'));
+    getSquare(6, 3)->setPiece(new Piece('b', 'P'));
 }
 
 Board::~Board()
@@ -84,7 +87,7 @@ string Board::getLegalMoves(int file, int rank)
         {return "";}
 
     Piece *currPiece = currSquare->getPiece();
-    string legalMoves;
+    string legalMoves = " ";
 
     if (currSquare->getPiece()->getNotation() == 'P') // pawn
         {getPawnLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
@@ -114,11 +117,14 @@ void Board::getPawnLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
             !board[file - 2][rank]->empty() && 
             board[file - 2][rank]->getPiece()->getColor() == 'b')            
         {
-            legalMoves += currSquare->getCoordinates().at(0);   
-            legalMoves += 'x';
-            legalMoves += (currSquare->getCoordinates().at(0) - 1);   
-            legalMoves += (currSquare->getCoordinates().at(1) + 1);
-            legalMoves += ' ';
+            legalMoves += currSquare->getCoordinates().at(0);
+            for (int i = 0; i < 2; ++i) // for both notations <file>x<coordinates> and x<coordinates>
+            {
+                legalMoves += 'x';
+                legalMoves += (currSquare->getCoordinates().at(0) - 1);   
+                legalMoves += (currSquare->getCoordinates().at(1) + 1);
+                legalMoves += ' ';
+            }
         }
 
         if (currSquare->getCoordinates().at(0) != 'h' &&               // taking right
@@ -126,10 +132,13 @@ void Board::getPawnLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
             board[file][rank]->getPiece()->getColor() == 'b')
         {
             legalMoves += currSquare->getCoordinates().at(0);
-            legalMoves += 'x';
-            legalMoves += (currSquare->getCoordinates().at(0) + 1);   
-            legalMoves += (currSquare->getCoordinates().at(1) + 1);
-            legalMoves += ' ';
+            for (int i = 0; i < 2; ++i) // for both notations <file>x<coordinates> and x<coordinates>
+            {
+                legalMoves += 'x';
+                legalMoves += (currSquare->getCoordinates().at(0) + 1);   
+                legalMoves += (currSquare->getCoordinates().at(1) + 1);
+                legalMoves += ' ';
+            }
         }
     }
     else // is black
@@ -152,11 +161,14 @@ void Board::getPawnLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
             !board[file - 2][rank - 2]->empty() && 
             board[file - 2][rank - 2]->getPiece()->getColor() == 'w')            
         {
-            legalMoves += currSquare->getCoordinates().at(0);   
-            legalMoves += 'x';
-            legalMoves += (currSquare->getCoordinates().at(0) - 1);   
-            legalMoves += (currSquare->getCoordinates().at(1) - 1);
-            legalMoves += ' ';
+            legalMoves += currSquare->getCoordinates().at(0);  
+            for (int i = 0; i < 2; ++i) // for both notations <file>x<coordinates> and x<coordinates>
+            { 
+                legalMoves += 'x';
+                legalMoves += (currSquare->getCoordinates().at(0) - 1);   
+                legalMoves += (currSquare->getCoordinates().at(1) - 1);
+                legalMoves += ' ';
+            }
         }
 
         if (currSquare->getCoordinates().at(0) != 'h' &&               // taking right
@@ -164,10 +176,13 @@ void Board::getPawnLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
             board[file][rank - 2]->getPiece()->getColor() == 'w')
         {
             legalMoves += currSquare->getCoordinates().at(0);
-            legalMoves += 'x';
-            legalMoves += (currSquare->getCoordinates().at(0) + 1);   
-            legalMoves += (currSquare->getCoordinates().at(1) - 1);
-            legalMoves += ' ';
+            for (int i = 0; i < 2; ++i) // for both notations <file>x<coordinates> and x<coordinates>
+            {
+                legalMoves += 'x';
+                legalMoves += (currSquare->getCoordinates().at(0) + 1);   
+                legalMoves += (currSquare->getCoordinates().at(1) - 1);
+                legalMoves += ' ';
+            }
         }
     }
 }
