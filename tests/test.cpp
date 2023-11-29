@@ -2,18 +2,11 @@
 #include "gtest/gtest.h"
 using namespace std;
 
-TEST(TestingLegalMoves, Pawn)
+int main()
 {
-    Game a;
+    Game g;
 
-    EXPECT_TRUE(a.isLegalMove(true, " e3 "));
-    EXPECT_TRUE(a.isLegalMove(true, " e4 "));
-    EXPECT_TRUE(a.isLegalMove(true, " xf3 "));
-    EXPECT_TRUE(a.isLegalMove(true, " exf3 "));
-    EXPECT_FALSE(a.isLegalMove(true, " xd3 "));
-    EXPECT_FALSE(a.isLegalMove(true, " exd3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " e3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " e4 "));
-    EXPECT_FALSE(a.isLegalMove(false, " xf3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " exf3 "));
+    cout << g.game->getLegalMoves(6,5) << endl;
+
+    return 0;
 }
