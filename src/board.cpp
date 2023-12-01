@@ -12,7 +12,30 @@ Board::Board() // generates empty board with pieces in starting position
             board[file - 1][rank - 1] = new Square(file, rank);
         }
     }
+  
+    for (unsigned int file = 1; file <= 8; ++file) {
+        getSquare(file, 2)->setPiece(new Piece('w', 'P'));
+    }
+    getSquare(1, 1)->setPiece(new Piece('w', 'R'));
+    getSquare(2, 1)->setPiece(new Piece('w', 'N'));
+    getSquare(3, 1)->setPiece(new Piece('w', 'B'));
+    getSquare(4, 1)->setPiece(new Piece('w', 'K'));
+    getSquare(5, 1)->setPiece(new Piece('w', 'Q'));
+    getSquare(6, 1)->setPiece(new Piece('w', 'B'));
+    getSquare(7, 1)->setPiece(new Piece('w', 'N'));
+    getSquare(8, 1)->setPiece(new Piece('w', 'R'));
 
+    for (unsigned int file = 1; file <= 8; ++file) {
+        getSquare(file, 7)->setPiece(new Piece('b', 'P'));
+    }
+    getSquare(1, 8)->setPiece(new Piece('b', 'R'));
+    getSquare(2, 8)->setPiece(new Piece('b', 'N'));
+    getSquare(3, 8)->setPiece(new Piece('b', 'B'));
+    getSquare(4, 8)->setPiece(new Piece('b', 'K'));
+    getSquare(5, 8)->setPiece(new Piece('b', 'Q'));
+    getSquare(6, 8)->setPiece(new Piece('b', 'B'));
+    getSquare(7, 8)->setPiece(new Piece('b', 'N'));
+    getSquare(8, 8)->setPiece(new Piece('b', 'R'));
 }
 
 Board::~Board()
@@ -28,7 +51,8 @@ Board::~Board()
 
 void Board::print()
 {
-    cout <<
+    unsigned int rankCounter = 8;   //to number the ranks
+    cout << 
         "\n-----------------------------------\n"
         "               BOARD               \n"
         "-----------------------------------\n"

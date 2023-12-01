@@ -21,6 +21,7 @@ void Game::play()
     while (!gameOver)
     {
         moveMade = false; // is used to end while loop after valid move made
+        for
         game->print();    // Print the current state of the board
         while (!moveMade)
         {
