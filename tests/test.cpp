@@ -12,4 +12,3 @@ int main() {
     board1.print();
     return 0;
 }
-
