@@ -20,8 +20,7 @@ ADD_EXECUTABLE(testingMain
     tests/testmain.cpp
 )
 
+
 target_link_libraries(test gtest gtest_main)
 target_link_libraries(testingMain gtest gtest_main)
 
-
-target_link_libraries(test gtest gtest_main)
