@@ -1,50 +1,141 @@
 #include "../header/game.h"
+#include <fstream>
 
-Game::Game()
-    {game = new Board();}
+Game::Game() {
+    game = new Board();  // Initialize the board
+    current_player = "White";  // Set the starting player
+}
 
-Game::~Game()
-    {delete game;}
+
+Game::~Game() {
+    delete game;  // Clean up the allocated Board
+}
+
 
 void Game::play() {
-    // FIXME
+    bool game_over = false;
+    bool moveForward = false;
+    while(!game_over) {
+        moveForward = false;
+        game->print();  // Print the current state of the board
+        while(!moveForward){
+            // Get the current player's move
+            string move;
+            cout << current_player << " player"<< ", enter your move: ";
+            cin >> move;
+            
+            move = " " + move + " ";
+            cout << move;
+            // Process the move
+            if (move == "exit" || move == "Exit" ) {
+                cout << "Exiting the game." << endl;
+                break;  // Exit the game loop
+            } else if (move == "help" || move == "Help" ) {
+                printInstructions();  // Show game instructions
+                continue;  // Skip the rest of the loop to prompt for a move again
+            } else {
+                // Check if the move is legal
+                if (isLegalMove(current_player == "White", move)) {
+                    // If legal, make the move and log it
+                    string moveTo = string(1, move[2]) + move[3];
+                    //game->movePiece(getOriginal(move[1],move[2],move[3]), moveTo);  //doesnt work
+                    gameLog.push_back(move);
+                    moveForward = true;
+                } else {
+                    cout << "Illegal move. Try again." << endl;
+                }
+            }
+        }
+
+        // Check the game status (checkmate, stalemate, etc.)
+        if (isCheckmate()) {
+            cout << "Checkmate! Player " << current_player << " wins!" << endl;
+            game_over = true;
+        } else if (isStalemate()) {
+            cout << "Stalemate! The game is a draw." << endl;
+            game_over = true;
+        } else if (inCheck()) {
+            cout << "Check! Be careful, Player " << current_player << "." << endl;
+        }
+
+        // Switch turns between players
+        current_player = (current_player == "White") ? "Black" : "White";
+    }
+}
+
+string Game::getOriginal(char piece, char file, char rank){
+   string fullPieceName;
+   switch(piece) {
+        case 'n': 
+            fullPieceName = "knight";
+            break;
+        case 'b':
+            fullPieceName = "bishop";
+            break;
+        case 'r':
+            fullPieceName = "rook";
+            break;
+        case 'q':
+            fullPieceName = "queen";
+            break;
+        case 'k':
+            fullPieceName = "king";
+            break;
+        default:
+            fullPieceName = "pawn";
+    }
+
+     
+
+    return "";
 }
 
 void Game::printGameLog() {
-    // FIXME
+    for (const string& move : gameLog) {
+        cout << move << endl;
+    }
 }
 
-void Game::saveGameLog(const string& fileName){
-    // FIXME
+
+void Game::saveGameLog(const string& fileName) {
+    ofstream file(fileName.c_str());
+    for (const string& move : gameLog) {
+        file << move << endl;
+    }
+    file.close();
+    cout << "Game log saved to " << fileName << endl;
 }
+
 
 void Game::mainMenu() {
-    int choice;
+    int choice = 0;
+        while (true) { 
+        cout <<
+        "---------------------------------\n"
+        "           CHESS GAME\n"
+        "---------------------------------\n"
+        "1. Start New Game\n"
+        "2. How to Play\n"
+        "3. Exit\n"
+        "Enter your choice: ";
 
-    cout <<
-    "---------------------------------\n"
-    "           CHESS GAME\n"
-    "---------------------------------\n"
-    "1. Start New Game\n"
-    "2. How to Play\n"
-    "3. Exit\n"
-    "Enter your choice: ";
+        cin >> choice;
 
-    cin >> choice;
-
-    switch (choice) {
-        case 1:
-            break;
-        case 2:
-            printInstructions();
-            mainMenu();
-            break;
-        case 3:
-            exit(0);
-            break;
-        default:
-            cout << "Invalid choice, please try again.\n";
-            mainMenu();
+        switch (choice) {
+            case 1:
+                play();
+                break;
+            case 2:
+                printInstructions();
+                break;
+            case 3:
+                exit(0);
+                break;
+            default:
+                cout << "Invalid choice, please try again.\n";
+                cin.clear();
+                cin.ignore();
+        }
     }
 }
 
@@ -86,18 +177,9 @@ void Game::printInstructions() {
     cin.ignore(); cin.get();
 }
 
-bool Game::isCheckmate() {
-    // FIXME
-    return false;
-}
-
-bool Game::isStalemate() {
-    // FIXME
-    return false;
-}
-
 bool Game::isLegalMove(bool whiteTurn, string input) 
 {
+
     if (whiteTurn)
     {
         for (int i = 1; i <= 8; ++i)
@@ -129,6 +211,13 @@ bool Game::isLegalMove(bool whiteTurn, string input)
 }
 
 bool Game::inCheck() {
-    // FIXME
+   return false;
+}
+
+bool Game::isCheckmate() {
+    return false;
+}
+
+bool Game::isStalemate() {
     return false;
 }

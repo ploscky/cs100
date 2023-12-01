@@ -11,8 +11,6 @@ Board::Board() // generates empty board with 1 pawn at e2 for testing purposes, 
         }
     }
 
-    getSquare(5, 2)->setPiece(new Piece('w', 'P'));
-    getSquare(6, 3)->setPiece(new Piece('b', 'P'));
 }
 
 Board::~Board()
@@ -29,14 +27,14 @@ Board::~Board()
 void Board::print()
 {
     cout <<
-        "-----------------------------------\n"
+        "\n-----------------------------------\n"
         "               BOARD               \n"
         "-----------------------------------\n"
         "Status: [Start of Game]\n"
         "\n"
         "    A   B   C   D   E   F   G   H  \n"
         "  ---------------------------------\n"
-        "8 | r | n | b | q | k | b | n | r |\n"
+        "8 | r | n | b | q | k | b | n | r |\n" 
         "  ---------------------------------\n"
         "7 | p | p | p | p | p | p | p | p |\n"
         "  ---------------------------------\n"
