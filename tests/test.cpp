@@ -2,18 +2,20 @@
 #include "gtest/gtest.h"
 using namespace std;
 
-TEST(TestingLegalMoves, Pawn)
+TEST(TestingLegalMoves, KnightMovement)
 {
-    Game a;
-
-    EXPECT_TRUE(a.isLegalMove(true, " e3 "));
-    EXPECT_TRUE(a.isLegalMove(true, " e4 "));
-    EXPECT_TRUE(a.isLegalMove(true, " xf3 "));
-    EXPECT_TRUE(a.isLegalMove(true, " exf3 "));
-    EXPECT_FALSE(a.isLegalMove(true, " xd3 "));
-    EXPECT_FALSE(a.isLegalMove(true, " exd3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " e3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " e4 "));
-    EXPECT_FALSE(a.isLegalMove(false, " xf3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " exf3 "));
+    Game n;
+    //Movement, based on knight at d5
+    EXPECT_TRUE(n.isLegalMove(true, " Ne7 "));
+    EXPECT_TRUE(n.isLegalMove(true, " Nc7 "));
+    EXPECT_TRUE(n.isLegalMove(true, " Nb6 "));
+    EXPECT_TRUE(n.isLegalMove(true, " Nb4 "));
+    EXPECT_TRUE(n.isLegalMove(true, " Nf6 "));
+    EXPECT_TRUE(n.isLegalMove(true, " Nf4 "));
+    EXPECT_TRUE(n.isLegalMove(true, " Ne3 "));
+    EXPECT_TRUE(n.isLegalMove(true, " Nc3 "));
+    
+    //Captures, false if square is not occupied
+    EXPECT_FALSE(n.isLegalMove(true, " Nxe7 "));
+    EXPECT_FALSE(n.isLegalMove(true, " Nxf4 "));
 }
