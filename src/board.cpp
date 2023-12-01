@@ -1,7 +1,9 @@
 #include "../header/board.h"
 #include <iostream>
+#include <cctype>
+#include <string>
 
-Board::Board() // generates empty board with 1 pawn at e2 for testing purposes, need to add rest of starting pieces
+Board::Board() // generates empty board with pieces in starting position
 {
     for (int file = 1; file <= 8; ++file)
     {
@@ -10,7 +12,30 @@ Board::Board() // generates empty board with 1 pawn at e2 for testing purposes, 
             board[file - 1][rank - 1] = new Square(file, rank);
         }
     }
+  
+    for (unsigned int file = 1; file <= 8; ++file) {
+        getSquare(file, 2)->setPiece(new Piece('w', 'P'));
+    }
+    getSquare(1, 1)->setPiece(new Piece('w', 'R'));
+    getSquare(2, 1)->setPiece(new Piece('w', 'N'));
+    getSquare(3, 1)->setPiece(new Piece('w', 'B'));
+    getSquare(4, 1)->setPiece(new Piece('w', 'K'));
+    getSquare(5, 1)->setPiece(new Piece('w', 'Q'));
+    getSquare(6, 1)->setPiece(new Piece('w', 'B'));
+    getSquare(7, 1)->setPiece(new Piece('w', 'N'));
+    getSquare(8, 1)->setPiece(new Piece('w', 'R'));
 
+    for (unsigned int file = 1; file <= 8; ++file) {
+        getSquare(file, 7)->setPiece(new Piece('b', 'P'));
+    }
+    getSquare(1, 8)->setPiece(new Piece('b', 'R'));
+    getSquare(2, 8)->setPiece(new Piece('b', 'N'));
+    getSquare(3, 8)->setPiece(new Piece('b', 'B'));
+    getSquare(4, 8)->setPiece(new Piece('b', 'K'));
+    getSquare(5, 8)->setPiece(new Piece('b', 'Q'));
+    getSquare(6, 8)->setPiece(new Piece('b', 'B'));
+    getSquare(7, 8)->setPiece(new Piece('b', 'N'));
+    getSquare(8, 8)->setPiece(new Piece('b', 'R'));
 }
 
 Board::~Board()
@@ -26,30 +51,42 @@ Board::~Board()
 
 void Board::print()
 {
-    cout <<
+    unsigned int rankCounter = 8;   //to number the ranks
+    cout << 
         "\n-----------------------------------\n"
         "               BOARD               \n"
         "-----------------------------------\n"
-        "Status: [Start of Game]\n"
-        "\n"
-        "    A   B   C   D   E   F   G   H  \n"
-        "  ---------------------------------\n"
-        "8 | r | n | b | q | k | b | n | r |\n" 
-        "  ---------------------------------\n"
-        "7 | p | p | p | p | p | p | p | p |\n"
-        "  ---------------------------------\n"
-        "6 | . | . | . | . | . | . | . | . |\n"
-        "  ---------------------------------\n"
-        "5 | . | . | . | . | . | . | . | . |\n"
-        "  ---------------------------------\n"
-        "4 | . | . | . | . | . | . | . | . |\n"
-        "  ---------------------------------\n"
-        "3 | . | . | . | . | . | . | . | . |\n"
-        "  ---------------------------------\n"
-        "2 | P | P | P | P | P | P | P | P |\n"
-        "  ---------------------------------\n"
-        "1 | R | N | B | K | Q | B | N | R |\n"
-        "  ---------------------------------\n";
+        "\n";
+
+    cout << 
+        "  A   B   C   D   E   F   G   H\n"
+        "---------------------------------\n";  //numbering the files
+
+    //ranks (rows)
+    for (unsigned int i = 8; i >= 1; --i) {
+        //files (columns)
+        for (unsigned int j = 1; j <= 8; ++j) {
+            Square* currSquare = getSquare(j, i);   //get current Square in board
+            Piece* currPiece = currSquare->getPiece();  //get the Piece that is on that Square
+            if (currPiece == nullptr) { //if there is no piece on the square, returns nullptr
+                cout << "|   "; //print space
+            }
+            else {  //piece on the square
+                char currNotation = currPiece->getNotation();   //get piece's notation
+                char currColor = currPiece->getColor(); //get piece's color
+
+                if (currColor == 'w') { //piece is white
+                cout << "| " << static_cast<char>(toupper(currNotation)) << ' ';
+                }
+                else {  //piece is black
+                cout << "| " << static_cast<char>(tolower(currNotation)) << ' ';
+                }
+            }
+        }
+        cout << "| ";
+        cout << rankCounter-- << " ";
+        cout << "\n---------------------------------\n";
+    }
 }
 
 Square * Board::getSquare(int file, int rank)
