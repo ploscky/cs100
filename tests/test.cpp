@@ -1,12 +1,15 @@
-#include "../header/game.h"
-#include "gtest/gtest.h"
+#include "../header/board.h"
 using namespace std;
 
-int main()
-{
-    Game g;
+int main() {
+    Game g; 
 
     cout << g.game->getLegalMoves(6,5) << endl;
 
+    
+    Board board1;
+    //board1.movePiece("e2", "e3");
+    board1.print();
     return 0;
 }
+
