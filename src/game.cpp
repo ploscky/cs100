@@ -91,9 +91,27 @@ bool Game::isCheckmate() {
     return false;
 }
 
-bool Game::isStalemate() {
-    // FIXME
-    return false;
+bool Game::isStalemate(bool isWhiteTurn)
+{
+    for (int i = 1; i <= 8; ++i)
+    {
+        for (int j = 1; j <= 8; ++j)
+        {
+            if (isWhiteTurn && 
+            !game->getSquare(i, j)->empty() &&
+            game->getSquare(i, j)->getPiece()->getColor() == 'w' &&
+            !(game->getLegalMoves(i, j).size() < 2))
+                {return false;}
+
+            if (!isWhiteTurn && 
+            !game->getSquare(i, j)->empty() &&
+            game->getSquare(i, j)->getPiece()->getColor() == 'b' &&
+            !(game->getLegalMoves(i, j).size() < 2))
+                {return false;}
+        }
+    }
+
+    return true;
 }
 
 bool Game::isLegalMove(bool whiteTurn, string input) 
