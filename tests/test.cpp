@@ -1,19 +1,14 @@
-#include "../header/game.h"
-#include "gtest/gtest.h"
+#include "../header/board.h"
 using namespace std;
 
-TEST(TestingLegalMoves, Pawn)
-{
-    Game a;
+int main() {
+    Game g; 
 
-    EXPECT_TRUE(a.isLegalMove(true, " e3 "));
-    EXPECT_TRUE(a.isLegalMove(true, " e4 "));
-    EXPECT_TRUE(a.isLegalMove(true, " xf3 "));
-    EXPECT_TRUE(a.isLegalMove(true, " exf3 "));
-    EXPECT_FALSE(a.isLegalMove(true, " xd3 "));
-    EXPECT_FALSE(a.isLegalMove(true, " exd3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " e3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " e4 "));
-    EXPECT_FALSE(a.isLegalMove(false, " xf3 "));
-    EXPECT_FALSE(a.isLegalMove(false, " exf3 "));
+    cout << g.game->getLegalMoves(6,5) << endl;
+
+    
+    Board board1;
+    //board1.movePiece("e2", "e3");
+    board1.print();
+    return 0;
 }

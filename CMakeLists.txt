@@ -1,5 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 
+project(TerminalChess)
+
 add_subdirectory(googletest)
 
 ADD_EXECUTABLE(test
