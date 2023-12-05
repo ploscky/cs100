@@ -12,7 +12,7 @@ Board::Board() // generates empty board with pieces in starting position
             board[file - 1][rank - 1] = new Square(file, rank);
         }
     }
-
+    
     for (unsigned int file = 1; file <= 8; ++file) {
         getSquare(file, 2)->setPiece(new Piece('w', 'P'));
     }
@@ -31,8 +31,8 @@ Board::Board() // generates empty board with pieces in starting position
     getSquare(1, 8)->setPiece(new Piece('b', 'R'));
     getSquare(2, 8)->setPiece(new Piece('b', 'N'));
     getSquare(3, 8)->setPiece(new Piece('b', 'B'));
-    getSquare(4, 8)->setPiece(new Piece('b', 'K'));
-    getSquare(5, 8)->setPiece(new Piece('b', 'Q'));
+    getSquare(4, 8)->setPiece(new Piece('b', 'Q'));
+    getSquare(5, 8)->setPiece(new Piece('b', 'K'));
     getSquare(6, 8)->setPiece(new Piece('b', 'B'));
     getSquare(7, 8)->setPiece(new Piece('b', 'N'));
     getSquare(8, 8)->setPiece(new Piece('b', 'R'));
@@ -52,15 +52,17 @@ Board::~Board()
 void Board::print()
 {
     unsigned int rankCounter = 8;   //to number the ranks
-    cout << 
+    cout <<
         "-----------------------------------\n"
         "               BOARD               \n"
         "-----------------------------------\n"
         "\n";
 
-    cout << 
+
+    cout <<
         "  A   B   C   D   E   F   G   H\n"
         "---------------------------------\n";  //numbering the files
+
 
     //ranks (rows)
     for (unsigned int i = 8; i >= 1; --i) {
@@ -74,6 +76,7 @@ void Board::print()
             else {  //piece on the square
                 char currNotation = currPiece->getNotation();   //get piece's notation
                 char currColor = currPiece->getColor(); //get piece's color
+
 
                 if (currColor == 'w') { //piece is white
                 cout << "| " << static_cast<char>(toupper(currNotation)) << ' ';
@@ -126,15 +129,18 @@ string Board::getLegalMoves(int file, int rank)
 
     if      (currSquare->getPiece()->getNotation() == 'P') // pawn
         {getPawnLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
+
     else if (currSquare->getPiece()->getNotation() == 'B') // bishop
         {getBishopLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
 
     else if (currSquare->getPiece()->getNotation() == 'R') // rook
         {getRookLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
-  
+ 
     else if (currSquare->getPiece()->getNotation() == 'N') // knight
         {getKnightLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
-   
+
+    else if (currSquare->getPiece()->getNotation() == 'K') // king
+        {getKingLegalMoves(legalMoves, currSquare, currPiece, file, rank);}   
 
     return legalMoves;
 }
@@ -148,7 +154,7 @@ void Board::getPawnLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
             legalMoves += currSquare->getCoordinates().at(0);         // forward 1 square
             legalMoves += (currSquare->getCoordinates().at(1) + 1);
             legalMoves += ' ';
-            
+           
             if (board[file - 1][rank + 1]->empty() && !currPiece->hasMoved())
             {
                 legalMoves += currSquare->getCoordinates().at(0);         // forward 2 squares
@@ -156,30 +162,40 @@ void Board::getPawnLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
                 legalMoves += ' ';
             }
         }
+       
+        legalMoves += '*';                                           // for king's legal moves
+        legalMoves += (currSquare->getCoordinates().at(0) - 1);  
+        legalMoves += (currSquare->getCoordinates().at(1) + 1);
+        legalMoves += ' ';
 
         if (currSquare->getCoordinates().at(0) != 'a' &&            // taking left
-            !board[file - 2][rank]->empty() && 
+            !board[file - 2][rank]->empty() &&
             board[file - 2][rank]->getPiece()->getColor() == 'b')            
         {
             legalMoves += currSquare->getCoordinates().at(0);
             for (int i = 0; i < 2; ++i) // for both notations <file>x<coordinates> and x<coordinates>
             {
                 legalMoves += 'x';
-                legalMoves += (currSquare->getCoordinates().at(0) - 1);   
+                legalMoves += (currSquare->getCoordinates().at(0) - 1);  
                 legalMoves += (currSquare->getCoordinates().at(1) + 1);
                 legalMoves += ' ';
             }
         }
 
+        legalMoves += '*';                                          // for king's legal moves
+        legalMoves += (currSquare->getCoordinates().at(0) + 1);  
+        legalMoves += (currSquare->getCoordinates().at(1) + 1);
+        legalMoves += ' ';
+
         if (currSquare->getCoordinates().at(0) != 'h' &&               // taking right
-            !board[file][rank]->empty() && 
+            !board[file][rank]->empty() &&
             board[file][rank]->getPiece()->getColor() == 'b')
         {
             legalMoves += currSquare->getCoordinates().at(0);
             for (int i = 0; i < 2; ++i) // for both notations <file>x<coordinates> and x<coordinates>
             {
                 legalMoves += 'x';
-                legalMoves += (currSquare->getCoordinates().at(0) + 1);   
+                legalMoves += (currSquare->getCoordinates().at(0) + 1);  
                 legalMoves += (currSquare->getCoordinates().at(1) + 1);
                 legalMoves += ' ';
             }
@@ -192,7 +208,7 @@ void Board::getPawnLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
             legalMoves += currSquare->getCoordinates().at(0);         // forward 1 square
             legalMoves += (currSquare->getCoordinates().at(1) - 1);
             legalMoves += ' ';
-            
+           
             if (board[file - 1][rank - 3]->empty() && !currPiece->hasMoved())
             {
                 legalMoves += currSquare->getCoordinates().at(0);         // forward 2 squares
@@ -201,29 +217,39 @@ void Board::getPawnLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
             }
         }
 
+        legalMoves += '*';                                          // for king's legal moves
+        legalMoves += (currSquare->getCoordinates().at(0) - 1);  
+        legalMoves += (currSquare->getCoordinates().at(1) - 1);
+        legalMoves += ' ';
+
         if (currSquare->getCoordinates().at(0) != 'a' &&            // taking left
-            !board[file - 2][rank - 2]->empty() && 
+            !board[file - 2][rank - 2]->empty() &&
             board[file - 2][rank - 2]->getPiece()->getColor() == 'w')            
         {
             legalMoves += currSquare->getCoordinates().at(0);  
             for (int i = 0; i < 2; ++i) // for both notations <file>x<coordinates> and x<coordinates>
-            { 
+            {
                 legalMoves += 'x';
-                legalMoves += (currSquare->getCoordinates().at(0) - 1);   
+                legalMoves += (currSquare->getCoordinates().at(0) - 1);  
                 legalMoves += (currSquare->getCoordinates().at(1) - 1);
                 legalMoves += ' ';
             }
         }
 
+        legalMoves += '*';                                          // for king's legal moves
+        legalMoves += (currSquare->getCoordinates().at(0) + 1);  
+        legalMoves += (currSquare->getCoordinates().at(1) - 1);
+        legalMoves += ' ';
+
         if (currSquare->getCoordinates().at(0) != 'h' &&               // taking right
-            !board[file][rank - 2]->empty() && 
+            !board[file][rank - 2]->empty() &&
             board[file][rank - 2]->getPiece()->getColor() == 'w')
         {
             legalMoves += currSquare->getCoordinates().at(0);
             for (int i = 0; i < 2; ++i) // for both notations <file>x<coordinates> and x<coordinates>
             {
                 legalMoves += 'x';
-                legalMoves += (currSquare->getCoordinates().at(0) + 1);   
+                legalMoves += (currSquare->getCoordinates().at(0) + 1);  
                 legalMoves += (currSquare->getCoordinates().at(1) - 1);
                 legalMoves += ' ';
             }
@@ -244,6 +270,11 @@ void Board::getRookLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
         }
         else
         {
+            legalMoves += '*';                                           // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0);
+            legalMoves += (currSquare->getCoordinates().at(1) + i);
+            legalMoves += ' ';
+
             if (rank + i <= 8 && board[file - 1][rank - 1 + i]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'R';
@@ -270,6 +301,7 @@ void Board::getRookLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
         }
     }
 
+
     for (int i = 1; i <= 7; ++i) // back i squares
     {
         if (rank - i >= 1 && board[file - 1][rank - 1 - i]->empty()) // if not off board and square is empty
@@ -281,6 +313,11 @@ void Board::getRookLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
         }
         else
         {
+            legalMoves += '*';                                           // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0);
+            legalMoves += (currSquare->getCoordinates().at(1) - i);
+            legalMoves += ' ';
+
             if (rank - i >= 1 && board[file - 1][rank - 1 - i]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'R';
@@ -318,6 +355,11 @@ void Board::getRookLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
         }
         else
         {
+            legalMoves += '*';                                           // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) - i;
+            legalMoves += (currSquare->getCoordinates().at(1));
+            legalMoves += ' ';
+
             if (file - i >= 1 && board[file - 1 - i][rank - 1]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'R';
@@ -355,6 +397,11 @@ void Board::getRookLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
         }
         else
         {
+            legalMoves += '*';                                           // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) + i;
+            legalMoves += (currSquare->getCoordinates().at(1));
+            legalMoves += ' ';
+
             if (file + i <= 8 && board[file - 1 + i][rank - 1]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'R';
@@ -385,7 +432,7 @@ void Board::getRookLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
 void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *currPiece, int file, int rank)
 {
     // right 1 square, forward 2 squares
-    if ((file) <= 7 && (rank + 1) <= 7)
+    if ((file + 1) <= 8 && (rank + 2) <= 8)
     {
         if (board[file][rank + 1]->empty())
         {
@@ -396,6 +443,11 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else // destination not empty, check color, then capture if different
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) + 1;
+            legalMoves += (currSquare->getCoordinates().at(1) + 2);
+            legalMoves += ' ';
+
             if (board[file][rank + 1]->getPiece()->getColor() != currPiece->getColor()) // if opposite colors
             {
             // for notation x<coordinates>
@@ -404,7 +456,7 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
             legalMoves += currSquare->getCoordinates().at(0) + 1;
             legalMoves += (currSquare->getCoordinates().at(1) + 2);
             legalMoves += ' ';
-            
+           
             // for notation <file>x<coordinates>
             legalMoves += 'N';
             legalMoves += currSquare->getCoordinates().at(0);
@@ -416,9 +468,8 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
     }
 
-
     // left 1 square, forward 2 squares
-    if ((file - 2) >= 1 && (rank + 1) <= 8)
+    if ((file - 1) >= 1 && (rank + 2) <= 8)
     {
         if (board[file - 2][rank + 1]->empty())
         {
@@ -429,6 +480,11 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else // destination not empty, check color, then capture if different
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) - 1;
+            legalMoves += (currSquare->getCoordinates().at(1) + 2);
+            legalMoves += ' ';
+
             if (board[file - 2][rank + 1]->getPiece()->getColor() != currPiece->getColor()) // if opposite colors
             {
                 // for notation x<coordinates>
@@ -437,7 +493,7 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += currSquare->getCoordinates().at(0) - 1;
                 legalMoves += (currSquare->getCoordinates().at(1) + 2);
                 legalMoves += ' ';
-                
+               
                 // for notation <file>x<coordinates>
                 legalMoves += 'N';
                 legalMoves += currSquare->getCoordinates().at(0);
@@ -447,12 +503,11 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += ' ';
             }
         }
-        
+       
     }
 
-
     // right 2 squares, down 1 square
-    if ((file + 1) <= 8 && (rank - 2) >= 1)
+    if ((file + 2) <= 8 && (rank - 1) >= 1)
     {
         if (board[file + 1][rank - 2]->empty())
         {
@@ -463,6 +518,11 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else // destination not empty, check color, then capture if different
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) + 2;
+            legalMoves += (currSquare->getCoordinates().at(1) - 1);
+            legalMoves += ' ';
+
             if (board[file + 1][rank - 2]->getPiece()->getColor() != currPiece->getColor()) // if opposite colors
             {
                 // for notation x<coordinates>
@@ -471,7 +531,7 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += currSquare->getCoordinates().at(0) + 2;
                 legalMoves += (currSquare->getCoordinates().at(1) - 1);
                 legalMoves += ' ';
-                
+               
                 // for notation <file>x<coordinates>
                 legalMoves += 'N';
                 legalMoves += currSquare->getCoordinates().at(0);
@@ -483,9 +543,8 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
     }
 
-
     // right 2 squares, up 1 square
-    if ((file + 1) <= 8 && (rank) <= 8)
+    if ((file + 2) <= 8 && (rank + 1) <= 8)
     {
         if (board[file + 1][rank]->empty())
         {
@@ -496,6 +555,11 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else // destination not empty, check color, then capture if different
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) + 2;
+            legalMoves += (currSquare->getCoordinates().at(1) + 1);
+            legalMoves += ' ';
+
             if (board[file + 1][rank]->getPiece()->getColor() != currPiece->getColor()) // if opposite colors
             {
                 // for notation x<coordinates>
@@ -504,7 +568,7 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += currSquare->getCoordinates().at(0) + 2;
                 legalMoves += (currSquare->getCoordinates().at(1) + 1);
                 legalMoves += ' ';
-                
+               
                 // for notation <file>x<coordinates>
                 legalMoves += 'N';
                 legalMoves += currSquare->getCoordinates().at(0);
@@ -516,9 +580,8 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
     }
 
-
     // left 2 squares, down 1 square
-    if ((file - 3) >= 1 && (rank - 2) >= 1)
+    if ((file - 2) >= 1 && (rank - 1) >= 1)
     {
         if (board[file - 3][rank - 2]->empty())
         {
@@ -529,6 +592,11 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else // destination not empty, check color, then capture if different
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) - 2;
+            legalMoves += (currSquare->getCoordinates().at(1) - 1);
+            legalMoves += ' ';
+
             if (board[file - 3][rank - 2]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 // for notation x<coordinates>
@@ -537,7 +605,7 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += currSquare->getCoordinates().at(0) - 2;
                 legalMoves += (currSquare->getCoordinates().at(1) - 1);
                 legalMoves += ' ';
-                
+               
                 // for notation <file>x<coordinates>
                 legalMoves += 'N';
                 legalMoves += currSquare->getCoordinates().at(0);
@@ -547,13 +615,10 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += ' ';
             }
         }
-
-        
     }
 
-
     // left 2 squares, up 1 square
-    if ((file - 3) >= 1 && (rank) <= 8)
+    if ((file - 2) >= 1 && (rank + 1) <= 8)
     {
         if (board[file - 3][rank]->empty())
         {
@@ -564,6 +629,11 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else // destination not empty, check color, then capture if different
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) - 2;
+            legalMoves += (currSquare->getCoordinates().at(1) + 1);
+            legalMoves += ' ';
+
             if (board[file - 3][rank]->getPiece()->getColor() != currPiece->getColor()) // if opposite colors
             {
                 // for notation x<coordinates>
@@ -572,7 +642,7 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += currSquare->getCoordinates().at(0) - 2;
                 legalMoves += (currSquare->getCoordinates().at(1) + 1);
                 legalMoves += ' ';
-                
+               
                 // for notation <file>x<coordinates>
                 legalMoves += 'N';
                 legalMoves += currSquare->getCoordinates().at(0);
@@ -583,10 +653,9 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
             }
         }
     }
-        
-
+       
     // left 1 square, down 2 squares
-    if ((file - 2) <= 8 && (rank - 3) >= 1)
+    if ((file - 1) <= 8 && (rank - 2) >= 1)
     {
         if (board[file - 2][rank - 3]->empty())
         {
@@ -597,6 +666,11 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else // destination not empty, check color, then capture if different
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) - 1;
+            legalMoves += (currSquare->getCoordinates().at(1) - 2);
+            legalMoves += ' ';
+
             if (board[file - 2][rank - 3]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 // for notation x<coordinates>
@@ -605,7 +679,7 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += currSquare->getCoordinates().at(0) - 1;
                 legalMoves += (currSquare->getCoordinates().at(1) - 2);
                 legalMoves += ' ';
-                
+               
                 // for notation <file>x<coordinates>
                 legalMoves += 'N';
                 legalMoves += currSquare->getCoordinates().at(0);
@@ -615,11 +689,10 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += ' ';
             }
         }
-    } 
-
+    }
 
     // right 1 square, down 2 squares
-    if ((file) <= 8 && (rank - 3) >= 1)
+    if ((file + 1) <= 8 && (rank - 2) >= 1)
     {
         if (board[file][rank - 3]->empty())
         {
@@ -630,15 +703,21 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else // destination not empty, check color, then capture if different
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += currSquare->getCoordinates().at(0) + 1;
+            legalMoves += (currSquare->getCoordinates().at(1) - 2);
+            legalMoves += ' ';
+
             if (board[file][rank - 3]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
+               
                 // for notation x<coordinates>
                 legalMoves += 'N';
                 legalMoves += 'x';
                 legalMoves += currSquare->getCoordinates().at(0) + 1;
                 legalMoves += (currSquare->getCoordinates().at(1) - 2);
                 legalMoves += ' ';
-                
+               
                 // for notation <file>x<coordinates>
                 legalMoves += 'N';
                 legalMoves += currSquare->getCoordinates().at(0);
@@ -664,6 +743,12 @@ void Board::getBishopLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += (currSquare->getCoordinates().at(0) - i);
+            legalMoves += (currSquare->getCoordinates().at(1) + i);
+            legalMoves += ' ';
+
+
             if (rank + i <= 8 && file - i >= 1  && board[file - 1 - i][rank - 1 + i]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'B';
@@ -701,6 +786,11 @@ void Board::getBishopLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += (currSquare->getCoordinates().at(0) + i);
+            legalMoves += (currSquare->getCoordinates().at(1) + i);
+            legalMoves += ' ';
+
             if (rank + i <= 8 && file + i <= 8  && board[file - 1 + i][rank - 1 + i]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'B';
@@ -738,6 +828,11 @@ void Board::getBishopLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         }
         else
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += (currSquare->getCoordinates().at(0) - i);
+            legalMoves += (currSquare->getCoordinates().at(1) - i);
+            legalMoves += ' ';
+
             if (rank - i >= 1 && file - i >= 1  && board[file - 1 - i][rank - 1 - i]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'B';
@@ -770,11 +865,16 @@ void Board::getBishopLegalMoves(string &legalMoves, Square *currSquare, Piece *c
         {
             legalMoves += 'B';
             legalMoves += currSquare->getCoordinates().at(0) + i;
-            legalMoves += (currSquare->getCoordinates().at(1) + i);
+            legalMoves += (currSquare->getCoordinates().at(1) - i);
             legalMoves += ' ';
         }
         else
         {
+            legalMoves += '*';                                          // for king's legal moves
+            legalMoves += (currSquare->getCoordinates().at(0) + i);
+            legalMoves += (currSquare->getCoordinates().at(1) - i);
+            legalMoves += ' ';
+
             if (rank - i >= 1 && file + i <= 8  && board[file - 1 - i][rank - 1 + i]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'B';
@@ -798,6 +898,285 @@ void Board::getBishopLegalMoves(string &legalMoves, Square *currSquare, Piece *c
                 legalMoves += ' ';
             }
             break; // if enemy is in the way, stop the loop
+        }
+    }
+}
+
+void Board::getKingLegalMoves(string &legalMoves, Square *currSquare, Piece *currPiece, int file, int rank)
+{
+    string coveredSquares;
+    string enemyKingCoordinates;
+    string pawnCoveredSquare;
+
+    for (int i = 1; i <= 8; ++i)
+    {
+        for (int j = 1; j <= 8; ++j)
+        {
+            if (getSquare(i, j)->getPiece() != nullptr &&               // populating coveredSquares with all coordinates enemy covers
+                getSquare(i, j)->getPiece()->getNotation() != 'K' &&
+                getSquare(i, j)->getPiece()->getNotation() != 'P' &&
+                getSquare(i, j)->getPiece()->getColor() != currPiece->getColor())
+                {coveredSquares += getLegalMoves(i, j);}
+
+            if (getSquare(i, j)->getPiece() != nullptr &&               // finding enemy king square
+                getSquare(i, j)->getPiece()->getNotation() == 'K' &&
+                getSquare(i, j)->getPiece()->getColor() != currPiece->getColor())
+                {enemyKingCoordinates = getSquare(i, j)->getCoordinates();}
+
+            if (getSquare(i, j)->getPiece() != nullptr &&
+                getSquare(i, j)->getPiece()->getNotation() == 'P' &&
+                getSquare(i, j)->getPiece()->getColor() != currPiece->getColor())
+            {
+                pawnCoveredSquare = getSquare(i, j)->getCoordinates();
+
+
+                if (getSquare(i, j)->getPiece()->getColor() == 'w')
+                {
+                    coveredSquares += pawnCoveredSquare.at(0) - 1;
+                    coveredSquares += pawnCoveredSquare.at(1) + 1;
+                    coveredSquares += pawnCoveredSquare.at(0) + 1;
+                    coveredSquares += pawnCoveredSquare.at(1) + 1;
+                }
+                else
+                {
+                    coveredSquares += pawnCoveredSquare.at(0) - 1;
+                    coveredSquares += pawnCoveredSquare.at(1) - 1;
+                    coveredSquares += pawnCoveredSquare.at(0) + 1;
+                    coveredSquares += pawnCoveredSquare.at(1) - 1;
+                }
+            }
+        }
+    }
+
+    enemyKingCoordinates.at(0) -= 1;            // for other king's covered squares
+    coveredSquares += enemyKingCoordinates;
+    enemyKingCoordinates.at(1) += 1;
+    coveredSquares += enemyKingCoordinates;
+    enemyKingCoordinates.at(0) += 1;
+    coveredSquares += enemyKingCoordinates;
+    enemyKingCoordinates.at(0) += 1;
+    coveredSquares += enemyKingCoordinates;
+    enemyKingCoordinates.at(1) -= 1;
+    coveredSquares += enemyKingCoordinates;
+    enemyKingCoordinates.at(1) -= 1;
+    coveredSquares += enemyKingCoordinates;
+    enemyKingCoordinates.at(0) -= 1;
+    coveredSquares += enemyKingCoordinates;
+    enemyKingCoordinates.at(0) -= 1;
+    coveredSquares += enemyKingCoordinates;
+
+
+    if (coveredSquares.find(board[file - 2][rank - 1]->getCoordinates()) == string::npos &&
+        file - 1 >= 1 && file - 1 <= 8 &&
+        rank >= 1 && rank <= 8) // left 1
+    {
+        if (board[file - 2][rank - 1]->empty())
+        {
+            legalMoves += 'K';
+            legalMoves += currSquare->getCoordinates().at(0) - 1;
+            legalMoves += currSquare->getCoordinates().at(1);
+            legalMoves += ' ';
+        }
+        else if (board[file - 2][rank - 1]->getPiece()->getColor() != currPiece->getColor())
+        {
+            legalMoves += 'K';
+            legalMoves += 'x';
+            legalMoves += currSquare->getCoordinates().at(0) - 1;
+            legalMoves += currSquare->getCoordinates().at(1);
+            legalMoves += ' ';
+        }
+    }
+
+    if (coveredSquares.find(board[file - 2][rank]->getCoordinates()) == string::npos &&
+        file - 1 >= 1 && file - 1 <= 8 &&
+        rank + 1 >= 1 && rank + 1 <= 8) // left 1, up 1
+    {
+        if (board[file - 2][rank]->empty())
+        {
+            legalMoves += 'K';
+            legalMoves += currSquare->getCoordinates().at(0) - 1;
+            legalMoves += currSquare->getCoordinates().at(1) + 1;
+            legalMoves += ' ';
+        }
+        else if (board[file - 2][rank]->getPiece()->getColor() != currPiece->getColor())
+        {
+            legalMoves += 'K';
+            legalMoves += 'x';
+            legalMoves += currSquare->getCoordinates().at(0) - 1;
+            legalMoves += currSquare->getCoordinates().at(1) + 1;
+            legalMoves += ' ';
+        }
+    }
+
+    if (coveredSquares.find(board[file - 1][rank]->getCoordinates()) == string::npos &&
+        file >= 1 && file <= 8 &&
+        rank + 1 >= 1 && rank + 1 <= 8) // up 1
+    {
+        if (board[file - 1][rank]->empty())
+        {
+            legalMoves += 'K';
+            legalMoves += currSquare->getCoordinates().at(0);
+            legalMoves += currSquare->getCoordinates().at(1) + 1;
+            legalMoves += ' ';
+        }
+        else if (board[file - 1][rank]->getPiece()->getColor() != currPiece->getColor())
+        {
+            legalMoves += 'K';
+            legalMoves += 'x';
+            legalMoves += currSquare->getCoordinates().at(0);
+            legalMoves += currSquare->getCoordinates().at(1) + 1;
+            legalMoves += ' ';
+        }
+    }
+
+    if (coveredSquares.find(board[file][rank]->getCoordinates()) == string::npos &&
+        file + 1 >= 1 && file + 1 <= 8 &&
+        rank + 1 >= 1 && rank + 1 <= 8) // right 1, up 1
+    {
+        if (board[file][rank]->empty())
+        {
+            legalMoves += 'K';
+            legalMoves += currSquare->getCoordinates().at(0) + 1;
+            legalMoves += currSquare->getCoordinates().at(1) + 1;
+            legalMoves += ' ';
+        }
+        else if (board[file][rank]->getPiece()->getColor() != currPiece->getColor())
+        {
+            legalMoves += 'K';
+            legalMoves += 'x';
+            legalMoves += currSquare->getCoordinates().at(0) + 1;
+            legalMoves += currSquare->getCoordinates().at(1) + 1;
+            legalMoves += ' ';
+        }
+    }
+
+    if (coveredSquares.find(board[file][rank - 1]->getCoordinates()) == string::npos &&
+        file + 1 >= 1 && file + 1 <= 8 &&
+        rank >= 1 && rank <= 8) // right 1
+    {
+        if (board[file][rank - 1]->empty())
+        {
+            legalMoves += 'K';
+            legalMoves += currSquare->getCoordinates().at(0) + 1;
+            legalMoves += currSquare->getCoordinates().at(1);
+            legalMoves += ' ';
+        }
+        else if (board[file][rank - 1]->getPiece()->getColor() != currPiece->getColor())
+        {
+            legalMoves += 'K';
+            legalMoves += 'x';
+            legalMoves += currSquare->getCoordinates().at(0) + 1;
+            legalMoves += currSquare->getCoordinates().at(1);
+            legalMoves += ' ';
+        }
+    }
+
+    if (coveredSquares.find(board[file][rank - 2]->getCoordinates()) == string::npos &&
+        file + 1 >= 1 && file + 1 <= 8 &&
+        rank - 1 >= 1 && rank - 1 <= 8) // right 1, down 1
+    {
+        if (board[file - 2][rank - 1]->empty())
+        {
+            legalMoves += 'K';
+            legalMoves += currSquare->getCoordinates().at(0) + 1;
+            legalMoves += currSquare->getCoordinates().at(1) - 1;
+            legalMoves += ' ';
+        }
+        else if (board[file][rank - 1]->getPiece()->getColor() != currPiece->getColor())
+        {
+            legalMoves += 'K';
+            legalMoves += 'x';
+            legalMoves += currSquare->getCoordinates().at(0) + 1;
+            legalMoves += currSquare->getCoordinates().at(1) - 1;
+            legalMoves += ' ';
+        }
+    }
+
+    if (coveredSquares.find(board[file - 1][rank - 2]->getCoordinates()) == string::npos &&
+        file >= 1 && file <= 8 &&
+        rank - 1 >= 1 && rank - 1 <= 8) // down 1
+    {
+        if (board[file - 2][rank - 1]->empty())
+        {
+            legalMoves += 'K';
+            legalMoves += currSquare->getCoordinates().at(0);
+            legalMoves += currSquare->getCoordinates().at(1) - 1;
+            legalMoves += ' ';
+        }
+        else if (board[file - 1][rank - 2]->getPiece()->getColor() != currPiece->getColor())
+        {
+            legalMoves += 'K';
+            legalMoves += 'x';
+            legalMoves += currSquare->getCoordinates().at(0);
+            legalMoves += currSquare->getCoordinates().at(1) - 1;
+            legalMoves += ' ';
+        }
+    }
+
+    if (coveredSquares.find(board[file - 2][rank - 2]->getCoordinates()) == string::npos &&
+        file - 1 >= 1 && file - 1 <= 8 &&
+        rank - 1 >= 1 && rank - 1 <= 8) // left 1, down 1
+    {
+        if (board[file - 2][rank - 2]->empty())
+        {
+            legalMoves += 'K';
+            legalMoves += currSquare->getCoordinates().at(0) - 1;
+            legalMoves += currSquare->getCoordinates().at(1) - 1;
+            legalMoves += ' ';
+        }
+        else if (board[file - 2][rank - 2]->getPiece()->getColor() != currPiece->getColor())
+        {
+            legalMoves += 'K';
+            legalMoves += 'x';
+            legalMoves += currSquare->getCoordinates().at(0) - 1;
+            legalMoves += currSquare->getCoordinates().at(1) - 1;
+            legalMoves += ' ';
+        }
+    }
+
+    if (!currPiece->hasMoved())
+    {
+        if (currPiece->getColor() == 'w')
+        {
+            if (getSquare(1, 1)->getPiece() != nullptr &&
+                !getSquare(1, 1)->getPiece()->hasMoved() &&
+                getSquare(2, 1)->empty() &&
+                getSquare(3, 1)->empty() &&
+                coveredSquares.find("d1") == string::npos &&
+                coveredSquares.find("c1") == string::npos &&
+                coveredSquares.find("b1") == string::npos)
+                {legalMoves += "O-O ";}
+           
+            if (getSquare(8, 1)->getPiece() != nullptr &&
+                !getSquare(8, 1)->getPiece()->hasMoved() &&
+                getSquare(5, 1)->empty() &&
+                getSquare(6, 1)->empty() &&
+                getSquare(7, 1)->empty() &&
+                coveredSquares.find("d1") == string::npos &&
+                coveredSquares.find("e1") == string::npos &&
+                coveredSquares.find("f1") == string::npos)
+                {legalMoves += "O-O-O ";}
+        }
+        else
+        {
+            if (getSquare(1, 8)->getPiece() != nullptr &&
+                !getSquare(1, 8)->getPiece()->hasMoved() &&
+                getSquare(2, 8)->empty() &&
+                getSquare(3, 8)->empty() &&
+                getSquare(4, 8)->empty() &&
+                coveredSquares.find("e8") == string::npos &&
+                coveredSquares.find("d8") == string::npos &&
+                coveredSquares.find("c8") == string::npos)
+                {legalMoves += "O-O-O ";}
+           
+            if (getSquare(8, 8)->getPiece() != nullptr &&
+                !getSquare(8, 8)->getPiece()->hasMoved() &&
+                getSquare(6, 8)->empty() &&
+                getSquare(7, 8)->empty() &&
+                coveredSquares.find("e8") == string::npos &&
+                coveredSquares.find("f8") == string::npos &&
+                coveredSquares.find("g8") == string::npos)
+                {legalMoves += "O-O ";}
         }
     }
 }
