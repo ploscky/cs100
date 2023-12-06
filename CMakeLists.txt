@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 
 project(TerminalChess)
 
-#add_subdirectory(googletest)
+add_subdirectory(googletest)
 
 ADD_EXECUTABLE(test
     src/board.cpp
@@ -18,4 +18,4 @@ ADD_EXECUTABLE(test
     tests/test.cpp
 )
 
-#target_link_libraries(test gtest gtest_main)
+target_link_libraries(test gtest gtest_main)
