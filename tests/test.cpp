@@ -1,4 +1,6 @@
 #include "../header/board.h"
+#include "../header/game.h"
+#include <iostream>
 using namespace std;
 
 int main() {
