@@ -63,7 +63,6 @@ void Board::getKingLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
     enemyKingCoordinates.at(0) -= 1;
     coveredSquares += enemyKingCoordinates;
 
-
     if (coveredSquares.find(board[file - 2][rank - 1]->getCoordinates()) == string::npos &&
         file - 1 >= 1 && file - 1 <= 8 &&
         rank >= 1 && rank <= 8) // left 1
@@ -173,14 +172,14 @@ void Board::getKingLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
         file + 1 >= 1 && file + 1 <= 8 &&
         rank - 1 >= 1 && rank - 1 <= 8) // right 1, down 1
     {
-        if (board[file - 2][rank - 1]->empty())
+        if (board[file][rank - 2]->empty())
         {
             legalMoves += 'K';
             legalMoves += currSquare->getCoordinates().at(0) + 1;
             legalMoves += currSquare->getCoordinates().at(1) - 1;
             legalMoves += ' ';
         }
-        else if (board[file][rank - 1]->getPiece()->getColor() != currPiece->getColor())
+        else if (board[file][rank - 2]->getPiece()->getColor() != currPiece->getColor())
         {
             legalMoves += 'K';
             legalMoves += 'x';
@@ -194,7 +193,7 @@ void Board::getKingLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
         file >= 1 && file <= 8 &&
         rank - 1 >= 1 && rank - 1 <= 8) // down 1
     {
-        if (board[file - 2][rank - 1]->empty())
+        if (board[file - 1][rank - 2]->empty())
         {
             legalMoves += 'K';
             legalMoves += currSquare->getCoordinates().at(0);
