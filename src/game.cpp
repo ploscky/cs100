@@ -146,7 +146,54 @@ bool Game::isLegalMove(bool whiteTurn, string input)
     return false;
 }
 
-bool Game::inCheck() {
-    // FIXME
+bool Game::inCheck(bool isWhiteTurn) 
+{
+    string kingCoordinates;
+
+    for (int i = 1; i <= 8; ++i)
+    {
+        for (int j = 1; j <= 8; ++j)
+        {
+            if (isWhiteTurn &&
+                !game->getSquare(i, j)->empty() &&               // finding white king square if white turn
+                game->getSquare(i, j)->getPiece()->getNotation() == 'K' &&
+                game->getSquare(i, j)->getPiece()->getColor() == 'w')
+                {kingCoordinates = game->getSquare(i, j)->getCoordinates();}
+
+            if (!isWhiteTurn &&
+                !game->getSquare(i, j)->empty() &&               // finding black king square if black turn
+                game->getSquare(i, j)->getPiece()->getNotation() == 'K' &&
+                game->getSquare(i, j)->getPiece()->getColor() == 'b')
+                {kingCoordinates = game->getSquare(i, j)->getCoordinates();}
+        }
+    }
+
+    if (isWhiteTurn)
+    {
+        for (int i = 1; i <= 8; ++i)
+        {
+            for (int j = 1; j <= 8; ++j)
+            {
+                if (!game->getSquare(i, j)->empty() &&
+                    game->getSquare(i, j)->getPiece()->getColor() == 'b' && 
+                    game->getLegalMoves(i, j).find("x" + kingCoordinates) != string::npos)
+                    {return true;}
+            }
+        }
+    }
+    else
+    {
+        for (int i = 1; i <= 8; ++i)
+        {
+            for (int j = 1; j <= 8; ++j)
+            {
+                if (!game->getSquare(i, j)->empty() &&
+                    game->getSquare(i, j)->getPiece()->getColor() == 'w' && 
+                    game->getLegalMoves(i, j).find("x" + kingCoordinates) != string::npos)
+                    {return true;}
+            }
+        }
+    }
+
     return false;
 }

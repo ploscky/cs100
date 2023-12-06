@@ -26,7 +26,7 @@ class Game
 
     public: // private: for testing purposes
         bool isCheckmate();
-        bool isStalemate(bool); //(white's turn)
+        bool isStalemate(bool); // (white's turn)
         bool isLegalMove(bool, string); // (white's turn, input)
-        bool inCheck();
+        bool inCheck(bool); // (white's turn)
 };
