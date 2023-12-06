@@ -9,6 +9,12 @@ ADD_EXECUTABLE(test
     src/game.cpp
     src/piece.cpp
     src/square.cpp
+    src/pawn.cpp
+    src/rook.cpp
+    src/knight.cpp
+    src/bishop.cpp
+    src/queen.cpp
+    src/king.cpp
     tests/test.cpp
 )
 
