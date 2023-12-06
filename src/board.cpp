@@ -19,8 +19,8 @@ Board::Board() // generates empty board with pieces in starting position
     getSquare(1, 1)->setPiece(new Piece('w', 'R'));
     getSquare(2, 1)->setPiece(new Piece('w', 'N'));
     getSquare(3, 1)->setPiece(new Piece('w', 'B'));
-    getSquare(4, 1)->setPiece(new Piece('w', 'K'));
-    getSquare(5, 1)->setPiece(new Piece('w', 'Q'));
+    getSquare(4, 1)->setPiece(new Piece('w', 'Q'));
+    getSquare(5, 1)->setPiece(new Piece('w', 'K'));
     getSquare(6, 1)->setPiece(new Piece('w', 'B'));
     getSquare(7, 1)->setPiece(new Piece('w', 'N'));
     getSquare(8, 1)->setPiece(new Piece('w', 'R'));

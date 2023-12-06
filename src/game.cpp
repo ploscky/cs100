@@ -86,6 +86,52 @@ void Game::printInstructions() {
     cin.ignore(); cin.get();
 }
 
+void Game::undoLastMove()
+{
+    if (gameLog.empty())
+        {return;}
+
+    bool isWhiteTurn = true;
+    string currMove;
+
+    delete game;
+    game = new Board();
+
+    for (int i = 0; i < gameLog.size() - 1; ++i)
+    {
+        currMove = gameLog.at(i);
+        currMove.erase(currMove.begin());
+        currMove.pop_back();
+        game->movePiece(movingPieceCoordinates(isWhiteTurn, currMove), currMove.substr(currMove.size() - 2, 2));
+        isWhiteTurn = !isWhiteTurn;
+    }
+
+    gameLog.pop_back();
+}
+
+string Game::movingPieceCoordinates(bool movingWhitePiece, string input)
+{
+    for (int i = 1; i <= 8; ++i)
+    {
+        for (int j = 1; j <= 8; ++j)
+        {
+            if (movingWhitePiece &&
+                !game->getSquare(i, j)->empty() &&
+                game->getSquare(i, j)->getPiece()->getColor() == 'w' &&
+                game->getLegalMoves(i, j).find(input) != string::npos)
+                {return game->getSquare(i, j)->getCoordinates();}
+            
+            if (!movingWhitePiece &&
+                !game->getSquare(i, j)->empty() &&
+                game->getSquare(i, j)->getPiece()->getColor() == 'b' &&
+                game->getLegalMoves(i, j).find(input) != string::npos)
+                {return game->getSquare(i, j)->getCoordinates();}
+        }
+    }
+
+    return "FUCK";
+}
+
 bool Game::isCheckmate() {
     // FIXME
     return false;
