@@ -127,11 +127,8 @@ string Board::getLegalMoves(int file, int rank)
     Piece *currPiece = currSquare->getPiece();
     string legalMoves = " ";
 
-    if (currSquare->getPiece()->getNotation() == 'P') // pawn
+    if      (currSquare->getPiece()->getNotation() == 'P') // pawn
         {getPawnLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
-
-    else if (currSquare->getPiece()->getNotation() == 'B') // bishop
-        {getBishopLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
 
     else if (currSquare->getPiece()->getNotation() == 'R') // rook
         {getRookLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
@@ -139,10 +136,14 @@ string Board::getLegalMoves(int file, int rank)
     else if (currSquare->getPiece()->getNotation() == 'N') // knight
         {getKnightLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
 
-    else if (currSquare->getPiece()->getNotation() == 'K') // king
-        {getKingLegalMoves(legalMoves, currSquare, currPiece, file, rank);}  
+    else if (currSquare->getPiece()->getNotation() == 'B') // bishop
+        {getBishopLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
 
-    else if (currSquare->getPiece()->getNotation() == 'Q')
+    else if (currSquare->getPiece()->getNotation() == 'Q') // queen
         {getQueenLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
+
+    else if (currSquare->getPiece()->getNotation() == 'K') // king
+        {getKingLegalMoves(legalMoves, currSquare, currPiece, file, rank);}   
+
     return legalMoves;
 }
