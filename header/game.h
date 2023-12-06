@@ -10,22 +10,23 @@ using namespace std;
 
 
 class Game {
-    public:
-        Board *game;
-        vector<string> gameLog;
+public:
+    Board *game;
+    vector<string> gameLog;
 
-    public:
-        Game();
-        ~Game();
-        void mainMenu();
-        void printInstructions();
-        void play();
-        void printGameLog();
-        void saveGameLog(const string& fileName);
+public:
+    Game();
+    ~Game();
+    void mainMenu();
+    void printInstructions();
+    void play();
+    void printGameLog();
 
-    public: // private: for testing purposes
-        bool isCheckmate();
-        bool isStalemate(bool); //(white's turn)
-        bool isLegalMove(bool, string); // (white's turn, input)
-        bool inCheck();
+
+
+public: // private: for testing purposes
+    bool isCheckmate();
+    bool isStalemate(bool isWhiteTurn);
+    bool isLegalMove(bool, string); // (white's turn, input)
+    bool inCheck();
 };
