@@ -1,9 +1,8 @@
 #pragma once
 #include "piece.h"
 
-class Bishop {
-    private:
-        bool moved;
+class Bishop : public Piece
+{
     public:
         void getBishopLegalMoves(string &, Square *, Piece *, int, int);
 };

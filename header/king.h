@@ -1,7 +1,8 @@
 #pragma once
 #include "piece.h"
 
-class King {
+class King 
+{
     private:
         bool moved;
     public:

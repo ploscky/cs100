@@ -9,7 +9,8 @@
 using namespace std;
 
 
-class Game {
+class Game 
+{
     public:
         Board *game;
         vector<string> gameLog;
