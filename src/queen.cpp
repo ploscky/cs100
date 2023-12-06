@@ -264,16 +264,16 @@ void Board::getQueenLegalMoves(string &legalMoves, Square *currSquare, Piece *cu
 
     for (int i = 1; i <= 7; ++i) // backward right diagonal i squares
     {
-        if (rank - i >= 1 && file + i <= 8 && board[file - 1 - i][rank - 1 + i]->empty()) // if not off board and square is empty (not capturing)
+        if (rank - i >= 1 && file + i <= 8 && board[file - 1 + i][rank - 1 - i]->empty()) // if not off board and square is empty (not capturing)
         {
             legalMoves += 'Q';
             legalMoves += currSquare->getCoordinates().at(0) + i;
-            legalMoves += (currSquare->getCoordinates().at(1) + i);
+            legalMoves += (currSquare->getCoordinates().at(1) - i);
             legalMoves += ' ';
         }
         else
         {
-            if (rank - i >= 1 && file + i <= 8  && board[file - 1 - i][rank - 1 + i]->getPiece()->getColor() != currPiece->getColor()) //if capturing opposing color
+            if (rank - i >= 1 && file + i <= 8  && board[file - 1 + i][rank - 1 - i]->getPiece()->getColor() != currPiece->getColor()) //if capturing opposing color
             {
                 legalMoves += 'Q';
                 legalMoves += 'x';                                        // for notation x<coordinates>
