@@ -239,20 +239,20 @@ void Board::getKingLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
                 !getSquare(1, 1)->getPiece()->hasMoved() &&
                 getSquare(2, 1)->empty() &&
                 getSquare(3, 1)->empty() &&
+                getSquare(4, 1)->empty() &&
+                coveredSquares.find("e1") == string::npos &&
                 coveredSquares.find("d1") == string::npos &&
-                coveredSquares.find("c1") == string::npos &&
-                coveredSquares.find("b1") == string::npos)
-                {legalMoves += "O-O ";}
+                coveredSquares.find("c1") == string::npos)
+                {legalMoves += "O-O-O ";}
            
             if (getSquare(8, 1)->getPiece() != nullptr &&
                 !getSquare(8, 1)->getPiece()->hasMoved() &&
-                getSquare(5, 1)->empty() &&
                 getSquare(6, 1)->empty() &&
                 getSquare(7, 1)->empty() &&
-                coveredSquares.find("d1") == string::npos &&
                 coveredSquares.find("e1") == string::npos &&
-                coveredSquares.find("f1") == string::npos)
-                {legalMoves += "O-O-O ";}
+                coveredSquares.find("f1") == string::npos &&
+                coveredSquares.find("g1") == string::npos)
+                {legalMoves += "O-O ";}
         }
         else
         {
