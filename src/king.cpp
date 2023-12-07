@@ -1,5 +1,4 @@
 #include "../header/board.h"
-#include <iostream>
 
 void Board::getKingLegalMoves(string &legalMoves, Square *currSquare, Piece *currPiece, int file, int rank)
 {
