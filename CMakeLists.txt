@@ -15,7 +15,6 @@ ADD_EXECUTABLE(unittests
     src/bishop.cpp
     src/queen.cpp
     src/king.cpp
-    tests/test.cpp
     tests/printBoardTest.cpp
     tests/rookTest.cpp
     tests/queenTest.cpp
@@ -35,4 +34,5 @@ ADD_EXECUTABLE(test
     tests/test.cpp
 )
 
+target_link_libraries(unittests gtest gtest_main)
 target_link_libraries(test gtest gtest_main)
