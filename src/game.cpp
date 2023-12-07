@@ -134,9 +134,10 @@ string Game::movingPieceCoordinates(bool movingWhitePiece, string input)
 
 bool Game::isCheckmate(bool isWhiteTurn) 
 {
-    if (inCheck(isWhiteTurn) && isStalemate(isWhiteTurn))
+    if (!inCheck(isWhiteTurn))
+        {return false;}
+    if (isStalemate(isWhiteTurn))
         {return true;}
-
 
     string currPieceLegalMoves;
     string currMove;
@@ -158,6 +159,9 @@ bool Game::isCheckmate(bool isWhiteTurn)
                     currPieceLegalMoves.erase(0, currPieceLegalMoves.find(' '));
 
                     if (currMove.find('*') != string::npos)
+                        {continue;}
+
+                    if (currMove == "O-O-O" || "O-O")
                         {continue;}
 
                     game->movePiece(movingPieceCoordinates(isWhiteTurn, currMove), currMove.substr(currMove.size() - 2, 2));
