@@ -226,7 +226,7 @@ void Board::getKnightLegalMoves(string &legalMoves, Square *currSquare, Piece *c
     }
        
     // left 1 square, down 2 squares
-    if ((file - 1) <= 8 && (rank - 2) >= 1)
+    if ((file - 1) >= 1 && (rank - 2) >= 1)
     {
         if (board[file - 2][rank - 3]->empty())
         {

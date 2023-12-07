@@ -131,7 +131,7 @@ void Board::getBishopLegalMoves(string &legalMoves, Square *currSquare, Piece *c
 
     for (int i = 1; i <= 7; ++i) // back right i squares
     {
-        if (rank - i >= 1 && file + i <= 8 && board[file - 1 - i][rank - 1 + i]->empty()) // if not off board and square is empty
+        if (rank - i >= 1 && file + i <= 8 && board[file - 1 + i][rank - 1 - i]->empty()) // if not off board and square is empty
         {
             legalMoves += 'B';
             legalMoves += currSquare->getCoordinates().at(0) + i;
@@ -145,7 +145,7 @@ void Board::getBishopLegalMoves(string &legalMoves, Square *currSquare, Piece *c
             legalMoves += (currSquare->getCoordinates().at(1) - i);
             legalMoves += ' ';
 
-            if (rank - i >= 1 && file + i <= 8  && board[file - 1 - i][rank - 1 + i]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
+            if (rank - i >= 1 && file + i <= 8  && board[file - 1 + i][rank - 1 - i]->getPiece()->getColor() != currPiece->getColor()) //if opposite colors
             {
                 legalMoves += 'B';
                 legalMoves += 'x';                                        // for notation x<coordinates>

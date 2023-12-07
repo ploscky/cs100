@@ -27,7 +27,7 @@ class Game
 
     public: // private: for testing purposes
         string movingPieceCoordinates(bool, string); // (white's turn, input)
-        bool isCheckmate();
+        bool isCheckmate(bool); // (white's turn)
         bool isStalemate(bool); // (white's turn)
         bool isLegalMove(bool, string); // (white's turn, input)
         bool inCheck(bool); // (white's turn)
