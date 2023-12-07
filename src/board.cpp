@@ -143,7 +143,7 @@ string Board::getLegalMoves(int file, int rank)
         {getQueenLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
 
     else if (currSquare->getPiece()->getNotation() == 'K') // king
-        {getKingLegalMoves(legalMoves, currSquare, currPiece, file, rank);}   
+        {getKingLegalMoves(legalMoves, currSquare, currPiece, file, rank);}
 
     return legalMoves;
 }

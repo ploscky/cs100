@@ -27,7 +27,6 @@ void Board::getKingLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
             {
                 pawnCoveredSquare = getSquare(i, j)->getCoordinates();
 
-
                 if (getSquare(i, j)->getPiece()->getColor() == 'w')
                 {
                     coveredSquares += pawnCoveredSquare.at(0) - 1;
@@ -35,7 +34,7 @@ void Board::getKingLegalMoves(string &legalMoves, Square *currSquare, Piece *cur
                     coveredSquares += pawnCoveredSquare.at(0) + 1;
                     coveredSquares += pawnCoveredSquare.at(1) + 1;
                 }
-                else
+                else if (getSquare(i, j)->getPiece()->getColor() == 'b')
                 {
                     coveredSquares += pawnCoveredSquare.at(0) - 1;
                     coveredSquares += pawnCoveredSquare.at(1) - 1;
