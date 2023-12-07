@@ -35,7 +35,7 @@ void Game::play()
 
             cout << "1. Return to menu\n"
                     "2. Show game log\n\n"
-                    "Choose an option: ";
+                    "Enter your choice: ";
                     while (true)
                     {
                         int choice = 0;
@@ -64,7 +64,7 @@ void Game::play()
                             "------------------------------------------------------------ \n"
                             "1. Return to menu\n"
                             "2. Show game log\n\n"
-                            "Choose an option: ";
+                            "Enter your choice: ";
             while (true)
             {
                 int choice = 0;
@@ -118,7 +118,7 @@ void Game::play()
                             "------------------------------------------------------------ \n"
                             "1. Return to menu \n"
                             "2. Show game log \n\n"
-                            "Choose an option: ";
+                            "Enter your choice: ";
                     while (true)
                     {
                         int choice = 0;
