@@ -16,6 +16,9 @@ ADD_EXECUTABLE(test
     src/queen.cpp
     src/king.cpp
     tests/test.cpp
+    tests/printBoardTest.cpp
+    tests/rookTest.cpp
+    tests/queenTest.cpp
 )
 
 target_link_libraries(test gtest gtest_main)
