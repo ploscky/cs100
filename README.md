@@ -213,7 +213,7 @@ UML Diagram Updates:
  ## Screenshots
  > Screenshots of the input/output after running your application
  ## Installation/Usage
- In order to install our program, go ahead and clone the repository, or download the zip file, extract it, and open the repository on VS Code. After that, go ahead and run the command "cmake .", then "make", then "./TerminalChess" to play our game. Have fun!
+ In order to install our program, go ahead and fork the repository, or download the zip file, extract it, and open the repository on VS Code. After that, go ahead and run the command "cmake .", then "make", then "./TerminalChess" to play our game. Have fun!
  ## Testing
  Our project was tested using the GoogleTest framework. With GoogleTest, we ran unit tests on our functions like constructors, print(), movePiece(), the legal moves for each piece, etc. The unit tests are organized into separate files and testing suites for easier testing and cleaner code. We also ran Valgrind to check for any memory leaks and errors, making sure that each block of memory is being allocated and freed correctly in our program.
  
