@@ -1,7 +1,7 @@
 #pragma once
 #include "piece.h"
 
-class King 
+class King : public Piece
 {
     private:
         bool moved;
