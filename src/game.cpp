@@ -129,6 +129,7 @@ void Game::play()
                             return;
                         case 2:
                             printGameLog();
+                            saveGameLog("GameLog.txt");
                             return;
                         default:
                             cout << "Invalid choice, please try again.\n";
@@ -210,12 +211,56 @@ void Game::play()
     }
 }
 
-void Game::printGameLog() {
-    // FIXME
+void Game::printGameLog()
+{
+    cout << "--------------------------------- \n"
+            "             GAME LOG \n"
+            "--------------------------------- \n"
+            "Moves are listed in chess notation.\n"
+            "Each line represents a full turn, with White's move listed first.\n";
+    for (unsigned i = 1; i < gameLog.size(); i++)
+    {
+        cout << i << "." << gameLog[i - 1] << gameLog[i] << endl;
+    }
+    cout << "Commands: \n"
+            "1. Return to Main Menu\n"
+            "2. Quit\n"
+            "Enter command: ";
+
+    
+    while (true)
+    {
+        int choice = 0;
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            return;
+            break;
+        case 2:
+            exit(0);
+            break;
+        default:
+            cout << "Invalid choice, please try again.\n";
+            cin.clear();
+            cin.ignore();
+        }
+    }
 }
 
-void Game::saveGameLog(const string& fileName){
-    // FIXME
+
+void Game::saveGameLog(const string& fileName) {
+    int curr = 1;
+    ofstream file(fileName);
+    if (!file.is_open()) {
+        cout << "Unable to open file: " << fileName << endl;  
+        return;  
+    }
+    file << "Game #" << curr << endl;
+    curr ++;
+    for (unsigned i = 1; i < gameLog.size(); i++) {
+        file << i << "." << gameLog[i - 1] << " " << gameLog[i] << endl;
+    }
 }
 
 void Game::mainMenu() {
