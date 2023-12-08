@@ -8,4 +8,5 @@ class Pawn : public Piece
     public:
         bool hasMoved();
         void getValidMoves(string &, Square *, Piece *, int, int);
+        void promotion();
 };

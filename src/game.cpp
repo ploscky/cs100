@@ -201,6 +201,9 @@ void Game::play()
                     {cout << "Illegal move. Try again." << endl;}
             }
         }
+        
+        // check for pawn promotion
+        game->pawnPromotion();
 
         // Switch turns between players
         isWhiteTurn = !isWhiteTurn;
