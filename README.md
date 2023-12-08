@@ -215,7 +215,7 @@ UML Diagram Updates:
  ## Installation/Usage
  > Instructions on installing and running your application
  ## Testing
- > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
+ Our project was tested using the GoogleTest framework. With GoogleTest, we ran unit tests on our functions like constructors, print(), movePiece(), the legal moves for each piece, etc. The unit tests are organized into separate files and testing suites for easier testing and cleaner code. We also ran Valgrind to check for any memory leaks and errors, making sure that each block of memory is being allocated and freed correctly in our program.
  
 
 
