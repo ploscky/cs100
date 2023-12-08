@@ -9,3 +9,4 @@ a.out
 cmake_install.cmake
 lib/
 startingchessboard
+unitTests
