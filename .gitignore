@@ -12,3 +12,6 @@ startingchessboard
 unitTests
 main
 TerminalChess
+testingMain
+.vscode/
+build/
