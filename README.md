@@ -32,15 +32,16 @@ The navigation diagram shows the process of a user playing through a chess game 
 Screen-Start:
 ```
 ---------------------------------        
-           CHESS GAME
+              CHESS
 ---------------------------------
 1. Start New Game
 2. How to Play
 3. Exit
+
 Enter your choice: [input]
 ```
 Components:
-Title: Simply the name of the game "CHESS GAME".
+Title: Simply the name of the game "CHESS".
 
 Options 1-3: Clear and concise menu options for the user.
 
@@ -107,7 +108,6 @@ Screen-Play:
 ---------------------------------
               BOARD
 ---------------------------------
-Status: [Game Status, ex( "White's Turn", "Check", "Checkmate")]
    
     A   B   C   D   E   F   G   H
   ---------------------------------
@@ -130,8 +130,6 @@ Status: [Game Status, ex( "White's Turn", "Check", "Checkmate")]
 ```
 Components:
 
-Status: Displays the current game status.
-
 Chessboard: Represents the game state. Uppercase letters for white pieces, lowercase for black pieces. (R/r for Rooks, N/n for Knights, etc.)
 
 Command Input: Where players input their moves, using a format like "e2 e4".
@@ -151,11 +149,12 @@ help: View list of possible commands and game controls.
 Screen-GameOver:
 ```
 -----------------------------------------------------------
-        GAME OVER - [WINNER White/Black or Stalemate
+        GAME OVER - [WINNER WHITE/BLACK or STALEMATE]
 ------------------------------------------------------------
 1. Continue
 2. Quit
-Choose an option: [input]
+
+Enter your choice: [input]
 ```
 Components & Purpose:
 
@@ -182,7 +181,8 @@ a full turn, with White's move listed first.
 Commands:
 1. Return to Main Menu
 2. Quit
-Enter command: [input]
+
+Enter your choice: [input]
 ```
 Components & Purpose:
 

@@ -35,5 +35,19 @@ ADD_EXECUTABLE(test
     tests/test.cpp
 )
 
+ADD_EXECUTABLE(main
+    src/board.cpp
+    src/game.cpp
+    src/piece.cpp
+    src/square.cpp
+    src/pawn.cpp
+    src/rook.cpp
+    src/knight.cpp
+    src/bishop.cpp
+    src/queen.cpp
+    src/king.cpp
+    src/main.cpp
+)
+
 target_link_libraries(unitTests gtest gtest_main)
 target_link_libraries(test gtest gtest_main)

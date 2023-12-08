@@ -6,8 +6,205 @@ Game::Game()
 Game::~Game()
     {delete game;}
 
-void Game::play() {
-    // FIXME
+void Game::play()
+{
+    delete game;
+    game = new Board();
+    gameLog.clear();
+
+    bool gameOver = false;
+    bool moveMade = false;
+    bool isWhiteTurn = true;
+    string move;
+
+    while (true)
+    {
+        cout << "\n\n\n\n\n\n\n\n\n\n";
+        moveMade = false; // is used to end while loop after valid move made
+        game->print();    // Print the current state of the board
+
+        // Check the game status (checkmate, stalemate, etc.)
+        if (isCheckmate(isWhiteTurn))
+        {
+            cout << "\n\n\n\n\n\n\n\n\n\n";
+            cout << "------------------------------------------------------------ \n"
+                    "                     GAME OVER - WINNER"; 
+                    if (isWhiteTurn) {cout << " BLACK\n";}
+                    else             {cout << " WHITE\n";}
+            cout << "------------------------------------------------------------ \n";
+
+            cout << "1. Return to menu\n"
+                    "2. Show game log\n\n"
+                    "Enter your choice: ";
+                    while (true)
+                    {
+                        int choice = 0;
+                        cin >> choice;
+                        switch (choice)
+                        {
+                        case 1:
+                            return;
+                        case 2:
+                            printGameLog();
+                            return;
+                        default:
+                            cout << "Invalid choice, please try again:\n";
+                            cin.clear();
+                            cin.ignore();
+                        }
+                    }
+                    return; // moves to next
+        }
+        else if (isStalemate(isWhiteTurn))
+        {
+            cout << "\n\n\n\n\n\n\n\n\n\n";
+            cout << "------------------------------------------------------------ \n"
+                            "               GAME OVER - STALEMATE "
+                            "\n"
+                            "------------------------------------------------------------ \n"
+                            "1. Return to menu\n"
+                            "2. Show game log\n\n"
+                            "Enter your choice: ";
+            while (true)
+            {
+                int choice = 0;
+                cin >> choice;
+                switch (choice)
+                {
+                case 1:
+                    return;
+                case 2:
+                    printGameLog();
+                    return;
+                default:
+                    cout << "Invalid choice, please try again: \n";
+                    cin.clear();
+                    cin.ignore();
+                }
+            }
+            return; // this is when the game is over
+        }
+        else if (inCheck(isWhiteTurn))
+        {
+            cout << "Check! Be careful!" << endl;
+        }
+
+        while (!moveMade)
+        {
+            // Get the current player's move
+            if (isWhiteTurn) {cout << "White ";}
+            else             {cout << "Black ";}
+            cout << "player, enter your move: ";
+
+            cin >> move;
+            move = " " + move + " ";
+
+            // Process the move
+            if (move == " exit " || move == " Exit ")
+            {
+                cout << "WARNING: Exiting the game will result in draw" << endl;
+                if (isWhiteTurn) {cout << "Black ";}
+                else             {cout << "White ";}
+                cout << "player, enter \"exit\" accept draw or any other key to deny: ";
+
+                cin >> move;
+                move = " " + move + " ";
+                if (move == " exit " || move == " Exit ")
+                {
+                    cout << "\n\n\n\n\n\n\n\n\n\n";
+                    cout << "------------------------------------------------------------ \n"
+                            "                     GAME OVER - DRAW "
+                            "\n"
+                            "------------------------------------------------------------ \n"
+                            "1. Return to menu \n"
+                            "2. Show game log \n\n"
+                            "Enter your choice: ";
+                    while (true)
+                    {
+                        int choice = 0;
+                        cin >> choice;
+                        switch (choice)
+                        {
+                        case 1:
+                            return;
+                        case 2:
+                            printGameLog();
+                            return;
+                        default:
+                            cout << "Invalid choice, please try again.\n";
+                            cin.clear();
+                            cin.ignore();
+                        }
+                    }
+                    return; // this is when the game is over
+                }
+                else
+                    {continue;} // Skip the rest of the loop to prompt for a move again
+            }
+            else if (move == " help " || move == " Help ")
+            {
+                printInstructions(); // Show game instructions
+                continue;            // Skip the rest of the loop to prompt for a move again
+            }
+            else
+            {
+                // Check if the move is legal
+                if (move.find('*') != string::npos)
+                    {cout << "Illegal move. Try again." << endl;}
+                else if (isLegalMove(isWhiteTurn, move))
+                {
+                    if (move == " O-O ")
+                    {
+                        if (isWhiteTurn == true)
+                        {
+                            game->movePiece("e1", "g1");
+                            game->movePiece("h1", "f1");
+                        }
+                        else
+                        {
+                            game->movePiece("e8", "g8");
+                            game->movePiece("h8", "f8");
+                        }
+
+                        gameLog.push_back(move);
+                    }
+                    else if (move == " O-O-O ")
+                    {
+                        if (isWhiteTurn == true)
+                        {
+                            game->movePiece("e1", "c1");
+                            game->movePiece("a1", "d1");
+                        }
+                        else
+                        {
+                            game->movePiece("e8", "e8");
+                            game->movePiece("a8", "d8");
+                        }
+
+                        gameLog.push_back(move);
+                    }
+                    else
+                    {
+                        game->movePiece(movingPieceCoordinates(isWhiteTurn, move), move.substr(move.size() - 3, 2));
+                        gameLog.push_back(move);
+                    }
+
+                    if (inCheck(isWhiteTurn)) // if revealing check, undo and prompt again
+                    {
+                        undoLastMove();
+                        cout << "Illegal move. Try again." << endl;
+                    }
+                    else
+                        {moveMade = true;}
+                }
+                else
+                    {cout << "Illegal move. Try again." << endl;}
+            }
+        }
+
+        // Switch turns between players
+        isWhiteTurn = !isWhiteTurn;
+    }
 }
 
 void Game::printGameLog() {
@@ -19,33 +216,14 @@ void Game::saveGameLog(const string& fileName){
 }
 
 void Game::mainMenu() {
-    int choice;
-
-    cout <<
+    cout << "\n\n\n\n\n\n\n\n\n\n"
     "---------------------------------\n"
-    "           CHESS GAME\n"
+    "              CHESS\n"
     "---------------------------------\n"
     "1. Start New Game\n"
     "2. How to Play\n"
-    "3. Exit\n"
+    "3. Exit\n\n"
     "Enter your choice: ";
-
-    cin >> choice;
-
-    switch (choice) {
-        case 1:
-            break;
-        case 2:
-            printInstructions();
-            mainMenu();
-            break;
-        case 3:
-            exit(0);
-            break;
-        default:
-            cout << "Invalid choice, please try again.\n";
-            mainMenu();
-    }
 }
 
 void Game::printInstructions() {
@@ -100,9 +278,7 @@ void Game::undoLastMove()
     for (int i = 0; i < gameLog.size() - 1; ++i)
     {
         currMove = gameLog.at(i);
-        currMove.erase(currMove.begin());
-        currMove.pop_back();
-        game->movePiece(movingPieceCoordinates(isWhiteTurn, currMove), currMove.substr(currMove.size() - 2, 2));
+        game->movePiece(movingPieceCoordinates(isWhiteTurn, currMove), currMove.substr(currMove.size() - 3, 2));
         isWhiteTurn = !isWhiteTurn;
     }
 
@@ -115,13 +291,13 @@ string Game::movingPieceCoordinates(bool movingWhitePiece, string input)
     {
         for (int j = 1; j <= 8; ++j)
         {
-            if (movingWhitePiece &&
+            if (movingWhitePiece == true &&
                 !game->getSquare(i, j)->empty() &&
                 game->getSquare(i, j)->getPiece()->getColor() == 'w' &&
                 game->getLegalMoves(i, j).find(input) != string::npos)
                 {return game->getSquare(i, j)->getCoordinates();}
             
-            if (!movingWhitePiece &&
+            if (movingWhitePiece == false &&
                 !game->getSquare(i, j)->empty() &&
                 game->getSquare(i, j)->getPiece()->getColor() == 'b' &&
                 game->getLegalMoves(i, j).find(input) != string::npos)
