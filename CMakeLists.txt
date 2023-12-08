@@ -35,7 +35,7 @@ ADD_EXECUTABLE(test
     tests/test.cpp
 )
 
-ADD_EXECUTABLE(main
+ADD_EXECUTABLE(TerminalChess
     src/board.cpp
     src/game.cpp
     src/piece.cpp
