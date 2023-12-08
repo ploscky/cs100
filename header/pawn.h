@@ -7,4 +7,5 @@ class Pawn
         bool moved;
     public:
         void getPawnLegalMoves(string &, Square *, Piece *, int, int);
+        void pawnPromotion();
 };

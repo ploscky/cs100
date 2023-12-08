@@ -4,7 +4,7 @@
 
 class Board
 {
-    public: // protected? i dont remember how this works lol
+    public:
         Square *board[8][8];
 
     public:
@@ -14,6 +14,7 @@ class Board
         Square * getSquare(int, int);
         void movePiece(string, string);
         string getLegalMoves(int, int);
+        void pawnPromotion();
     
     private:
         void getPawnLegalMoves(string &, Square *, Piece *, int, int);
