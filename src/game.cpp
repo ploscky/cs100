@@ -129,7 +129,6 @@ void Game::play()
                             return;
                         case 2:
                             printGameLog();
-                            saveGameLog("GameLog.txt");
                             return;
                         default:
                             cout << "Invalid choice, please try again.\n";
@@ -224,10 +223,11 @@ void Game::printGameLog()
     }
     cout << "Commands: \n"
             "1. Return to Main Menu\n"
-            "2. Quit\n"
+            "2. Save game log as file\n"
             "Enter command: ";
 
-    
+    string input;
+
     while (true)
     {
         int choice = 0;
@@ -236,10 +236,11 @@ void Game::printGameLog()
         {
         case 1:
             return;
-            break;
         case 2:
-            exit(0);
-            break;
+            cout << "Enter file name: ";
+            cin >> input;
+            saveGameLog(input);
+            return;
         default:
             cout << "Invalid choice, please try again.\n";
             cin.clear();
@@ -250,16 +251,17 @@ void Game::printGameLog()
 
 
 void Game::saveGameLog(const string& fileName) {
-    int curr = 1;
     ofstream file(fileName);
+    file.open(fileName);
+
     if (!file.is_open()) {
         cout << "Unable to open file: " << fileName << endl;  
         return;  
     }
-    file << "Game #" << curr << endl;
-    curr ++;
+    cout << gameLog.at(0) << endl;
+    cout << gameLog.at(1) << endl;
     for (unsigned i = 1; i < gameLog.size(); i++) {
-        file << i << "." << gameLog[i - 1] << " " << gameLog[i] << endl;
+        file << i << "." << gameLog.at(i - 1) << " " << gameLog[i] << endl;
     }
 }
 
