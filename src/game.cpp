@@ -217,9 +217,12 @@ void Game::printGameLog()
             "--------------------------------- \n"
             "Moves are listed in chess notation.\n"
             "Each line represents a full turn, with White's move listed first.\n";
-    for (unsigned i = 1; i < gameLog.size(); i++)
+    for (unsigned i = 0; i < gameLog.size(); ++i) 
     {
-        cout << i << "." << gameLog[i - 1] << gameLog[i] << endl;
+        if (((i + 1) % 2) != 0)
+            {cout << (i / 2) + 1 << "." << gameLog.at(i);}
+        else
+            {cout << "\t" << gameLog.at(i) << endl;}
     }
     cout << "Commands: \n"
             "1. Return to Main Menu\n"
@@ -252,16 +255,13 @@ void Game::printGameLog()
 
 void Game::saveGameLog(const string& fileName) {
     ofstream file(fileName);
-    file.open(fileName);
 
-    if (!file.is_open()) {
-        cout << "Unable to open file: " << fileName << endl;  
-        return;  
-    }
-    cout << gameLog.at(0) << endl;
-    cout << gameLog.at(1) << endl;
-    for (unsigned i = 1; i < gameLog.size(); i++) {
-        file << i << "." << gameLog.at(i - 1) << " " << gameLog[i] << endl;
+    for (unsigned i = 0; i < gameLog.size(); ++i) 
+    {
+        if (((i + 1) % 2) != 0)
+            {file << (i / 2) + 1 << "." << gameLog.at(i);}
+        else
+            {file << "\t" << gameLog.at(i) << endl;}
     }
 }
 
