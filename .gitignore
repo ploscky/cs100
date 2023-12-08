@@ -10,3 +10,7 @@ cmake_install.cmake
 lib/
 startingchessboard
 unitTests
+TerminalChess
+testingMain
+.vscode/
+build/
