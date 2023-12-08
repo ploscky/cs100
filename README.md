@@ -211,7 +211,19 @@ UML Diagram Updates:
  > * Make sure your README file and Project board are up-to-date reflecting the current status of your project (e.g. any changes that you have made during the project such as changes to your class diagram). Previous versions should still be visible through your commit history. 
  
  ## Screenshots
- > Screenshots of the input/output after running your application
+ <img src="Instructions.png?raw=true" width="484">
+ 
+ <img src="White First Move.png?raw=true" width="300"> <img src="Black First Move.png?raw=true" width="300">
+
+ <img src="White Second Move.png?raw=true" width="300"> <img src="Black Second Move.png?raw=true" width="300">
+ 
+ <img src="White Third Move.png?raw=true" width="300"> <img src="Black Third Move.png?raw=true" width="300">
+ 
+ <img src="White Fourth Move.png?raw=true" width="300"> <img src="Game Over Checkmate.png?raw=true" width="300">
+ 
+ <img src="Game Log.png?raw=true" width="300"> <img src="Return Main Menu.png?raw=true" width="300">
+ 
+ 
  ## Installation/Usage
  In order to install our program, go ahead and fork the repository, or download the zip file, extract it, and open the repository on VS Code. After that, go ahead and run the command "cmake .", then "make", then "./TerminalChess" to play our game. Have fun!
  ## Testing
