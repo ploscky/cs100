@@ -4,5 +4,5 @@
 class Bishop : public Piece
 {
     public:
-        void getBishopLegalMoves(string &, Square *, Piece *, int, int);
+        void getValidMoves(string &, Square *, Piece *, int, int);
 };

@@ -1,4 +1,3 @@
-main
 unittests
 test
 a.out
@@ -10,3 +9,4 @@ a.out
 cmake_install.cmake
 lib/
 startingchessboard
+unitTests

@@ -4,5 +4,5 @@
 class Knight : public Piece
 {
     public:
-        void getKnightLegalMoves(string &, Square *, Piece *, int, int);
+        void getValidMoves(string &, Square *, Piece *, int, int);
 };

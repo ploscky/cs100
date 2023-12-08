@@ -1,10 +1,11 @@
 #pragma once
 #include "piece.h"
 
-class Rook 
+class Rook : public Piece
 {
     private:
         bool moved;
     public:
-        void getRookLegalMoves(string &, Square *, Piece *, int, int);
+        bool hasMoved();
+        void getValidMoves(string &, Square *, Piece *, int, int);
 };

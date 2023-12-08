@@ -1,11 +1,12 @@
 #pragma once
 #include "piece.h"
 
-class Pawn 
+class Pawn : public Piece
 {
     private:
         bool moved;
     public:
-        void getPawnLegalMoves(string &, Square *, Piece *, int, int);
-        void pawnPromotion();
+        bool hasMoved();
+        void getValidMoves(string &, Square *, Piece *, int, int);
+        void promotion();
 };
