@@ -15,10 +15,15 @@ ADD_EXECUTABLE(unitTests
     src/bishop.cpp
     src/queen.cpp
     src/king.cpp
+
     tests/printBoardTest.cpp
-    tests/rookTest.cpp
-    tests/queenTest.cpp
     tests/boardTest.cpp
+    tests/kingTest.cpp
+    tests/queenTest.cpp
+    tests/bishopTest.cpp
+    tests/knightTest.cpp
+    tests/rookTest.cpp
+    tests/pawnTest.cpp
 )
 
 ADD_EXECUTABLE(test
