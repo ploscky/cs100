@@ -6,5 +6,6 @@ class King : public Piece
     private:
         bool moved;
     public:
-        void getKingLegalMoves(string &, Square *, Piece *, int, int);
+        bool hasMoved();
+        void getValidMoves(string &, Square *, Piece *, int, int);
 };

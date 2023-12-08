@@ -6,5 +6,6 @@ class Pawn : public Piece
     private:
         bool moved;
     public:
-        void getPawnLegalMoves(string &, Square *, Piece *, int, int);
+        bool hasMoved();
+        void getValidMoves(string &, Square *, Piece *, int, int);
 };
