@@ -4,7 +4,7 @@ project(TerminalChess)
 
 add_subdirectory(googletest)
 
-ADD_EXECUTABLE(unittests
+ADD_EXECUTABLE(unitTests
     src/board.cpp
     src/game.cpp
     src/piece.cpp
@@ -18,6 +18,7 @@ ADD_EXECUTABLE(unittests
     tests/printBoardTest.cpp
     tests/rookTest.cpp
     tests/queenTest.cpp
+    tests/boardTest.cpp
 )
 
 ADD_EXECUTABLE(test
@@ -48,5 +49,5 @@ ADD_EXECUTABLE(main
     src/main.cpp
 )
 
-target_link_libraries(unittests gtest gtest_main)
+target_link_libraries(unitTests gtest gtest_main)
 target_link_libraries(test gtest gtest_main)
